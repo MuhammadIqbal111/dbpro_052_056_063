@@ -13,10 +13,10 @@ namespace foodcorner.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB22Entities : DbContext
+    public partial class DB22Entities1 : DbContext
     {
-        public DB22Entities()
-            : base("name=DB22Entities")
+        public DB22Entities1()
+            : base("name=DB22Entities1")
         {
         }
     
@@ -39,5 +39,10 @@ namespace foodcorner.Models
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<SupplierCategory> SupplierCategories { get; set; }
         public virtual DbSet<SupplierItem> SupplierItems { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

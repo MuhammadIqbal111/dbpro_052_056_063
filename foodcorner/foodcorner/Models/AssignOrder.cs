@@ -16,7 +16,7 @@ namespace foodcorner.Models
     {
         public int DelivererId { get; set; }
         public int OrderId { get; set; }
-        public double DeliveryTime { get; set; }
+        public Nullable<double> DeliveryTime { get; set; }
         public string Status { get; set; }
     
         public virtual DeliveryTeam DeliveryTeam { get; set; }

@@ -1,5 +1,12 @@
-﻿using System.Collections.Generic;
+﻿
+
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using System.Linq;
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace foodcorner.Models
 {
@@ -65,9 +72,31 @@ namespace foodcorner.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "First Name")]
+        [RegularExpression(@"^[a-zA-Z ]*$",
+              ErrorMessage = "Invalid characters in Name")]
+        public string FName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        [RegularExpression(@"^[a-zA-Z ]*$",
+              ErrorMessage = "Invalid characters in Name")]
+        public string LName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Contact Number")]
+        [RegularExpression("^[0-9]{11}$", ErrorMessage = "Contact number is not valid. It should 11 digit")]
+        public string Number { get; set; }
+
+        [Required]
+        
+        [Display(Name = "Address")]
+        public string address { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -77,8 +106,27 @@ namespace foodcorner.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Role")]
+        public string roles { get; set; }
+        public static IEnumerable<SelectListItem> GetRole()
+        {
+            IList<SelectListItem> items = new List<SelectListItem>
+        {
+
+            new SelectListItem { Text="Customer",Value="Customer"},
+            new SelectListItem { Text="Chef",Value="Chef"},
+            new SelectListItem { Text="Delivery",Value="Delivery"},
+            new SelectListItem { Text="Supplier",Value="Supplier"},
+
+
+
+
+        };
+            return items;
+        }
     }
 
     public class ResetPasswordViewModel
@@ -96,7 +144,7 @@ namespace foodcorner.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -109,4 +157,7 @@ namespace foodcorner.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+
+
 }

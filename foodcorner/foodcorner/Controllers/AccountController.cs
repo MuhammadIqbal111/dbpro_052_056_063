@@ -15,14 +15,16 @@ namespace foodcorner.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        ApplicationDbContext context = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _rolManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +36,9 @@ namespace foodcorner.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -68,29 +70,46 @@ namespace foodcorner.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(model);
+                var user = await UserManager.FindAsync(model.Email, model.Password);
+                if (user != null)
+                {
+                    await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                    if (String.IsNullOrEmpty(returnUrl))
+                    {
+                        if (UserManager.IsInRole(user.Id, "Customer"))
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        if (UserManager.IsInRole(user.Id, "Chef"))
+                        {
+                            return RedirectToAction("About", "Home");
+                        }
+                        if (UserManager.IsInRole(user.Id, "Supplier"))
+                        {
+                            return RedirectToAction("Contact", "Home");
+                        }
+                        if (UserManager.IsInRole(user.Id, "Delivery"))
+                        {
+                            return RedirectToAction("Register", "Account");
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid username or password.");
+                }
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
-
+    
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -142,6 +161,8 @@ namespace foodcorner.Controllers
             return View();
         }
 
+        
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -151,20 +172,69 @@ namespace foodcorner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {  Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    if (model.roles == "Customer")
+                    {
+                        DB22Entities1 db1 = new DB22Entities1();
+                        Customer cus = new Customer();
+                        cus.Address = model.address;
+                        cus.Id = user.Id;
+                        db1.Customers.Add(cus);
+                        db1.SaveChanges();
+                        await UserManager.AddToRoleAsync(user.Id, "Customer");
+                        db1.SaveChanges();
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else if(model.roles=="Chef")
+                    {
+                            DB22Entities1 db1 = new DB22Entities1();
+                            Chef che = new Chef();
+                            che.Id = user.Id;
+                            db1.Chefs.Add(che);
+                            db1.SaveChanges();
+                            await UserManager.AddToRoleAsync(user.Id, "Chef");
+                            db1.SaveChanges();
+                            return RedirectToAction("Index", "Home");
+                        
+                    }
 
-                    return RedirectToAction("Index", "Home");
+                    else if (model.roles == "Supplier")
+                    {
+                        DB22Entities1 db1 = new DB22Entities1();
+                        Supplier che = new Supplier();
+                        che.Id = user.Id;
+                        db1.Suppliers.Add(che);
+                        db1.SaveChanges();
+                        await UserManager.AddToRoleAsync(user.Id, "Supplier");
+                        db1.SaveChanges();
+                        return RedirectToAction("Index", "Home");
+
+                    }
+
+                    else if (model.roles == "Delivery")
+                    {
+                        DB22Entities1 db1 = new DB22Entities1();
+                        DeliveryTeam che = new DeliveryTeam();
+                        che.Id = user.Id;
+                        db1.DeliveryTeams.Add(che);
+                        db1.SaveChanges();
+                        await UserManager.AddToRoleAsync(user.Id, "Delivery");
+                        db1.SaveChanges();
+                        return RedirectToAction("Index", "Home");
+
+                    }
+                    else
+                    {
+                        return View(model);
+                    }
+
+
                 }
+
                 AddErrors(result);
             }
 
