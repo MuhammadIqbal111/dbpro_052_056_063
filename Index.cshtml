@@ -1,0 +1,65 @@
+﻿@model IEnumerable<foodery.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<html>
+<h1 style="color:blue;"><u><center>Welcome Admin Panel</center></u></h1>
+<head>
+    
+<body>
+    
+    <ul>
+        <li>@Html.ActionLink("View Supplier Menu", "ViewSupplierMenu", "Admin")</li>
+
+        <br>
+        <li>@Html.ActionLink("View Customers", "ViewCustomers", "Admin")</li>
+
+        <br>
+        <li>@Html.ActionLink("View Orders", "ViewOrders", "Admin")</li>
+        <br>
+
+        <li>@Html.ActionLink("View Suppliers", "ViewSuppliers", "Admin")</li>
+        <br>
+
+        <li>@Html.ActionLink("GenerateReports", "Reports", "Admin")</li>
+
+        <br>
+        <li>@Html.ActionLink("View Chefs", "ViewChefs", "Admin")</li>
+        <br>
+        <li>@Html.ActionLink("View DeliveryTeam", "ViewDeliveryTeam", "Admin")</li>
+        <br>
+    </ul>
+       
+</head>
+</body>
+</html>
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.CategoryId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.CategoryId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.CategoryId })
+            </td>
+        </tr>
+    }
+
+    </table>*@
