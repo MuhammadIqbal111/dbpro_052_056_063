@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DB22ModelStoreContainer" CdmEntityContainer="DB22Entities1">
+  <EntityContainerMapping StorageEntityContainer="DB22ModelStoreContainer" CdmEntityContainer="DB22Entities3">
     <EntitySetMapping Name="AdminOrders">
       <EntityTypeMapping TypeName="DB22Model.AdminOrder">
         <MappingFragment StoreEntitySet="AdminOrder">
@@ -105,6 +105,7 @@
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
           <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+          <ScalarProperty Name="Feedback" ColumnName="Feedback" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -133,6 +134,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -149,7 +151,6 @@
     <EntitySetMapping Name="AspNetRoles">
       <EntityTypeMapping TypeName="DB22Model.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
-          <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

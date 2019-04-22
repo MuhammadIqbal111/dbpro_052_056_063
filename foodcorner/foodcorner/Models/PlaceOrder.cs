@@ -25,6 +25,7 @@ namespace foodcorner.Models
         public string Status { get; set; }
         public System.DateTime OrderDate { get; set; }
         public Nullable<System.DateTime> RequiredDate { get; set; }
+        public string Feedback { get; set; }
     
         public virtual AssignOrder AssignOrder { get; set; }
         public virtual Customer Customer { get; set; }

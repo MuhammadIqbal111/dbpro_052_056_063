@@ -11,12 +11,7 @@ namespace foodcorner.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;
-    using System.Linq;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class AspNetRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,30 +19,11 @@ namespace foodcorner.Models
         {
             this.AspNetUsers = new HashSet<AspNetUser>();
         }
-
+    
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Discriminator { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
-
-        public static IEnumerable<SelectListItem> GetRole()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>
-        {
-
-            new SelectListItem { Text="Customer",Value="Customer"},
-            new SelectListItem { Text="Chef",Value="Chef"},
-            new SelectListItem { Text="Delivery",Value="Delivery"},
-            new SelectListItem { Text="Supplier",Value="Supplier"},
-            
-
-
-
-        };
-            return items;
-        }
     }
-
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using foodcorner.Models;
+using System.Data.Entity.Validation;
 
 namespace foodcorner.Controllers
 {
@@ -18,8 +19,7 @@ namespace foodcorner.Controllers
         ApplicationDbContext context = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private ApplicationRoleManager _rolManager;
-
+       
         public AccountController()
         {
         }
@@ -172,14 +172,14 @@ namespace foodcorner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {  Email = model.Email };
+                var user = new ApplicationUser { UserName=model.FName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     if (model.roles == "Customer")
                     {
-                        DB22Entities1 db1 = new DB22Entities1();
+                        DB22Entities3 db1 = new DB22Entities3();
                         Customer cus = new Customer();
                         cus.Address = model.address;
                         cus.Id = user.Id;
@@ -191,39 +191,53 @@ namespace foodcorner.Controllers
                     }
                     else if(model.roles=="Chef")
                     {
-                            DB22Entities1 db1 = new DB22Entities1();
+                            DB22Entities3 db1 = new DB22Entities3();
                             Chef che = new Chef();
                             che.Id = user.Id;
                             db1.Chefs.Add(che);
+                        try
+                        {
                             db1.SaveChanges();
-                            await UserManager.AddToRoleAsync(user.Id, "Chef");
-                            db1.SaveChanges();
+                        }
+                            
+                         catch (DbEntityValidationException dbEx)
+                        {
+                            foreach (var validationErrors in dbEx.EntityValidationErrors)
+                            {
+                                foreach (var validationError in validationErrors.ValidationErrors)
+                                {
+                                    System.Console.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                                }
+                            }
+                        }
+                        await UserManager.AddToRoleAsync(user.Id, "Chef");
+                            //db1.SaveChanges();
                             return RedirectToAction("Index", "Home");
                         
                     }
 
                     else if (model.roles == "Supplier")
                     {
-                        DB22Entities1 db1 = new DB22Entities1();
+                        DB22Entities3 db1 = new DB22Entities3();
                         Supplier che = new Supplier();
                         che.Id = user.Id;
                         db1.Suppliers.Add(che);
                         db1.SaveChanges();
                         await UserManager.AddToRoleAsync(user.Id, "Supplier");
-                        db1.SaveChanges();
+                        //db1.SaveChanges();
                         return RedirectToAction("Index", "Home");
 
                     }
 
                     else if (model.roles == "Delivery")
                     {
-                        DB22Entities1 db1 = new DB22Entities1();
+                        DB22Entities3 db1 = new DB22Entities3();
                         DeliveryTeam che = new DeliveryTeam();
                         che.Id = user.Id;
                         db1.DeliveryTeams.Add(che);
                         db1.SaveChanges();
                         await UserManager.AddToRoleAsync(user.Id, "Delivery");
-                        db1.SaveChanges();
+                        //db1.SaveChanges();
                         return RedirectToAction("Index", "Home");
 
                     }

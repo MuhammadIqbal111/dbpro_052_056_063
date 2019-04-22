@@ -112,6 +112,7 @@
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+    <Property Name="Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="AssignOrder" Relationship="Self.FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId" FromRole="PlaceOrder" ToRole="AssignOrder" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_PlaceOrder_dbo_Customer_CustomerId" FromRole="PlaceOrder" ToRole="Customer" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId" FromRole="PlaceOrder" ToRole="OrderDetail" />
@@ -142,6 +143,7 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Price" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="AdminOrderDetails" Relationship="Self.FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId" FromRole="SupplierItems" ToRole="AdminOrderDetail" />
     <NavigationProperty Name="SupplierCategory" Relationship="Self.FK_dbo_SupplierItems_dbo_SupplierCategory_CatId" FromRole="SupplierItems" ToRole="SupplierCategory" />
   </EntityType>
@@ -299,7 +301,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DB22Entities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB22Entities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AdminOrders" EntityType="Self.AdminOrder" />
     <EntitySet Name="AdminOrderDetails" EntityType="Self.AdminOrderDetail" />
     <EntitySet Name="AssignOrders" EntityType="Self.AssignOrder" />
@@ -392,7 +394,6 @@
     </Key>
     <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUsers" Relationship="DB22Model.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="AspNetUserClaim">

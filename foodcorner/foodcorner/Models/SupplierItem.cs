@@ -25,6 +25,7 @@ namespace foodcorner.Models
         public string Name { get; set; }
         public int Price { get; set; }
         public string Description { get; set; }
+        public string Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdminOrderDetail> AdminOrderDetails { get; set; }

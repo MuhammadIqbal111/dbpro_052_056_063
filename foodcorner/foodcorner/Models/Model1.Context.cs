@@ -13,10 +13,10 @@ namespace foodcorner.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB22Entities1 : DbContext
+    public partial class DB22Entities3 : DbContext
     {
-        public DB22Entities1()
-            : base("name=DB22Entities1")
+        public DB22Entities3()
+            : base("name=DB22Entities3")
         {
         }
     

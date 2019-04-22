@@ -38,7 +38,6 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
@@ -164,6 +163,7 @@
           <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="OrderDate" Type="datetime" Nullable="false" />
           <Property Name="RequiredDate" Type="datetime" />
+          <Property Name="Feedback" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -189,6 +189,7 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId">
           <End Role="AdminOrder" Type="Self.AdminOrder" Multiplicity="1">
@@ -598,6 +599,7 @@
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+          <Property Name="Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AssignOrder" Relationship="Self.FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId" FromRole="PlaceOrder" ToRole="AssignOrder" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_PlaceOrder_dbo_Customer_CustomerId" FromRole="PlaceOrder" ToRole="Customer" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId" FromRole="PlaceOrder" ToRole="OrderDetail" />
@@ -628,6 +630,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AdminOrderDetails" Relationship="Self.FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId" FromRole="SupplierItems" ToRole="AdminOrderDetail" />
           <NavigationProperty Name="SupplierCategory" Relationship="Self.FK_dbo_SupplierItems_dbo_SupplierCategory_CatId" FromRole="SupplierItems" ToRole="SupplierCategory" />
         </EntityType>
@@ -785,7 +788,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DB22Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DB22Entities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminOrders" EntityType="Self.AdminOrder" />
           <EntitySet Name="AdminOrderDetails" EntityType="Self.AdminOrderDetail" />
           <EntitySet Name="AssignOrders" EntityType="Self.AssignOrder" />
@@ -878,7 +881,6 @@
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="DB22Model.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
@@ -959,7 +961,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DB22ModelStoreContainer" CdmEntityContainer="DB22Entities1">
+        <EntityContainerMapping StorageEntityContainer="DB22ModelStoreContainer" CdmEntityContainer="DB22Entities3">
           <EntitySetMapping Name="AdminOrders">
             <EntityTypeMapping TypeName="DB22Model.AdminOrder">
               <MappingFragment StoreEntitySet="AdminOrder">
@@ -1064,6 +1066,7 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1092,6 +1095,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1108,7 +1112,6 @@
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="DB22Model.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
