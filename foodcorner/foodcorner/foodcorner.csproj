@@ -576,12 +576,18 @@
     <Content Include="Views\DeliveryTeams\Details.cshtml" />
     <Content Include="Views\DeliveryTeams\Edit.cshtml" />
     <Content Include="Views\DeliveryTeams\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Suppliers\Welcome.cshtml" />
     <Content Include="Views\SupplierCategories\Create.cshtml" />
     <Content Include="Views\SupplierCategories\Delete.cshtml" />
     <Content Include="Views\SupplierCategories\Details.cshtml" />
     <Content Include="Views\SupplierCategories\Edit.cshtml" />
     <Content Include="Views\SupplierCategories\Index.cshtml" />
+=======
+    <Content Include="Views\Suppliers\viewsuppliermenu.cshtml" />
+    <Content Include="Views\Suppliers\ViewCategory.cshtml" />
+    <Content Include="Views\Suppliers\ViewItems.cshtml" />
+>>>>>>> 218c2c703ed5a227653c587ea102c023694c0360
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

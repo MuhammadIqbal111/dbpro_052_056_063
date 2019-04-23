@@ -18,6 +18,10 @@ namespace foodcorner.Models
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 218c2c703ed5a227653c587ea102c023694c0360
     public partial class SupplierCategory
     {
         public DB22Entities3 db = new DB22Entities3();
@@ -33,7 +37,15 @@ namespace foodcorner.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplierItem> SupplierItems { get; set; }
+<<<<<<< HEAD
 
        
+=======
+        public IEnumerable<SupplierCategory> doctorsspec(int spec)
+        {
+            var ide = db.SupplierCategories.Where(p => (p.SupplierId == spec));
+            return ide;
+        }
+>>>>>>> 218c2c703ed5a227653c587ea102c023694c0360
     }
 }

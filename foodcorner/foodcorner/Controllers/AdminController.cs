@@ -17,20 +17,14 @@ namespace foodcorner.Controllers
 
         public ActionResult Index()
         {
-            
-            return View(db.Categories.ToList());
-            
-            
+            return View(db.Categories.ToList());   
         }
         public ActionResult Welcome()
         {
             return View();
         }
 
-        public ActionResult ViewSupplierMenu()
-        {
-            return View();
-        }
+       
         public ActionResult ViewCustomers()
         {
             return RedirectToAction("Index", "Customers");
@@ -49,7 +43,7 @@ namespace foodcorner.Controllers
         {
             return RedirectToAction("Index", "Suppliers");
         }
-        public ActionResult ViewDelivery()
+        public ActionResult ViewDeliveryTeam()
         {
             return RedirectToAction("Index", "DeliveryTeams");
         }
@@ -202,11 +196,16 @@ namespace foodcorner.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
         public ActionResult ViewDeliveryTeam()
         {
             return View();
         }
        
+=======
+        
+        
+>>>>>>> 218c2c703ed5a227653c587ea102c023694c0360
 
             // GET: Admin/Details/5
             public ActionResult Details(int? id)
