@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using foodcorner.Models;
 
 namespace foodcorner.Controllers
@@ -18,6 +19,20 @@ namespace foodcorner.Controllers
         public ActionResult Index()
         {
             return View(db.Suppliers.ToList());
+        }
+        public ActionResult Welcome(string id)
+        {
+
+            Supplier sp = new Supplier();
+            sp.SupplierId = db.Suppliers.FirstOrDefault(x => x.Id.Equals(id)).SupplierId;
+            return View(sp);
+        }
+            
+
+        public ActionResult ViewMenu(string id)
+        {
+            Supplier supplier = db.Suppliers.Find(id);
+            return View(supplier);
         }
 
         // GET: Suppliers/Details/5

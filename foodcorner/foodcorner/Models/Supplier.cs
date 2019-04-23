@@ -11,9 +11,15 @@ namespace foodcorner.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+    using System.Linq;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Supplier
     {
+        public DB22Entities3 db = new DB22Entities3();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supplier()
         {
@@ -26,5 +32,6 @@ namespace foodcorner.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdminOrderDetail> AdminOrderDetails { get; set; }
+      
     }
 }

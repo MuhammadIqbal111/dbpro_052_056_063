@@ -1,0 +1,38 @@
+﻿@model IEnumerable<foodcorner.Models.SupplierCategory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create", new { id = item.CatId })
+        </p>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CatId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CatId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CatId })
+            </td>
+        </tr>
+    }
+
+</table>

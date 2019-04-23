@@ -19,6 +19,13 @@ namespace foodcorner.Controllers
         {
             return View(db.DeliveryTeams.ToList());
         }
+        public ActionResult Welcome(string id)
+        {
+
+            DeliveryTeam sp = new DeliveryTeam();
+            sp.DelivererId = db.DeliveryTeams.FirstOrDefault(x => x.Id.Equals(id)).DelivererId;
+            return View(sp);
+        }
 
         // GET: DeliveryTeams/Details/5
         public ActionResult Details(int? id)
