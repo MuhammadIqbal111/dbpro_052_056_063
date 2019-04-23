@@ -19,7 +19,43 @@ namespace foodcorner.Controllers
         {
             return View(db.Suppliers.ToList());
         }
+        public ActionResult welcome()
+        {
+            return View(db.SupplierCategories.ToList());
+        }
+        public ActionResult ViewCategory(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
+            Supplier cat = db.Suppliers.Find(id);
+            if (cat == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cat);
+        }
+        public ActionResult ViewItems(int? id, int? idd)
+        {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                SupplierCategory cat = db.SupplierCategories.Find(idd);
+                Supplier sup = db.Suppliers.Find(id);
+                SupplierItem itemsDetail = db.SupplierItems.Find(id);
+                itemsDetail.CatId = cat.CatId;
+                if (itemsDetail == null)
+                {
+                    return HttpNotFound();
+                }
+                
+                return View(itemsDetail);
+            
+        }
         // GET: Suppliers/Details/5
         public ActionResult Details(int? id)
         {

@@ -559,6 +559,9 @@
     <Content Include="Views\DeliveryTeams\Details.cshtml" />
     <Content Include="Views\DeliveryTeams\Edit.cshtml" />
     <Content Include="Views\DeliveryTeams\Index.cshtml" />
+    <Content Include="Views\Suppliers\viewsuppliermenu.cshtml" />
+    <Content Include="Views\Suppliers\ViewCategory.cshtml" />
+    <Content Include="Views\Suppliers\ViewItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
