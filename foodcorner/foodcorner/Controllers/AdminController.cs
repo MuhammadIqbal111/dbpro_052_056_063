@@ -33,22 +33,12 @@ namespace foodcorner.Controllers
         }
         public ActionResult ViewCustomers()
         {
+            return RedirectToAction("Index", "Customers");
 
-            List<Customer> list = new List<Customer>();
-            var customers = db.Customers;
-            var asp = db.AspNetUsers;
-            foreach (Customer b in customers)
-            {
-                foreach (AspNetUser a in asp)
-                {
-
-                    if (b.Id == a.Id)
-                    {
-                        list.Add(b);
-                    }
-                }
-            }
-            return View(list);
+        }
+        public ActionResult ViewChefs()
+        {
+            return RedirectToAction("Index", "Chefs");
 
         }
         public ActionResult ViewOrders()
@@ -57,7 +47,11 @@ namespace foodcorner.Controllers
         }
         public ActionResult ViewSuppliers()
         {
-            return View();
+            return RedirectToAction("Index", "Suppliers");
+        }
+        public ActionResult ViewDelivery()
+        {
+            return RedirectToAction("Index", "DeliveryTeams");
         }
         public ActionResult Menu()
         {

@@ -183,6 +183,7 @@ namespace foodcorner.Controllers
                         Customer cus = new Customer();
                         cus.Address = model.address;
                         cus.Id = user.Id;
+                        cus.Name =model.FName;
                         db1.Customers.Add(cus);
                         db1.SaveChanges();
                         await UserManager.AddToRoleAsync(user.Id, "Customer");
@@ -194,7 +195,8 @@ namespace foodcorner.Controllers
                             DB22Entities3 db1 = new DB22Entities3();
                             Chef che = new Chef();
                             che.Id = user.Id;
-                            db1.Chefs.Add(che);
+                            che.Name = model.FName;
+                        db1.Chefs.Add(che);
                         try
                         {
                             db1.SaveChanges();
@@ -221,6 +223,7 @@ namespace foodcorner.Controllers
                         DB22Entities3 db1 = new DB22Entities3();
                         Supplier che = new Supplier();
                         che.Id = user.Id;
+                        che.Name = model.FName;
                         db1.Suppliers.Add(che);
                         db1.SaveChanges();
                         await UserManager.AddToRoleAsync(user.Id, "Supplier");
@@ -234,6 +237,7 @@ namespace foodcorner.Controllers
                         DB22Entities3 db1 = new DB22Entities3();
                         DeliveryTeam che = new DeliveryTeam();
                         che.Id = user.Id;
+                        che.Name = model.FName;
                         db1.DeliveryTeams.Add(che);
                         db1.SaveChanges();
                         await UserManager.AddToRoleAsync(user.Id, "Delivery");
