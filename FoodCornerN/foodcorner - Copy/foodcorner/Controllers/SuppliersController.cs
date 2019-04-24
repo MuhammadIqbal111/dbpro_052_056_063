@@ -19,6 +19,7 @@ namespace foodcorner.Controllers
         {
             return View(db.SupplierCategories.ToList());
         }
+      
         public ActionResult Welcome(string id)
         {
 
