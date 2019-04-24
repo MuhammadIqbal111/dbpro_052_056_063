@@ -1,0 +1,51 @@
+﻿@model foodcorner.Models.Supplier
+
+@{
+                /**/
+
+                ViewBag.Title = "ViewCategory";
+}
+
+<h2>ViewCategory</h2>
+
+                
+    @{
+        foodcorner.Models.SupplierCategory dg = new foodcorner.Models.SupplierCategory();
+
+        IEnumerable<foodcorner.Models.SupplierCategory> lst = dg.doctorsspec(Model.SupplierId);
+
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <p style="margin-top:50px;font-family:Arial;font-size:15px; margin-bottom:25px;padding-top:70px;padding-left:30px; text-align:left"><b>Supplier Name:@Html.DisplayFor(modelItem => Model.Name)</b></p>
+
+        <table class="table table-bordered table-condensed">
+            <tbody>
+                <tr>
+
+                    <th style="font-family:Arial;font-size:24px">CATEGORY NAME</th>
+
+
+                </tr>
+                @foreach (var item in lst.ToList())
+                {
+                    <tr>
+                        <td style="font-family:Arial;font-size:24px">@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>
+                            @Html.ActionLink("View Items", "ViewItems", new { id = item.SupplierId, idd = item.CatId }) |
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

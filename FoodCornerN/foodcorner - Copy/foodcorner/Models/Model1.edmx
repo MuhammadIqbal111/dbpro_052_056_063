@@ -1,0 +1,851 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB22Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AdminOrderDetail">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="SuppItemId" Type="int" Nullable="false" />
+          <Property Name="Paymnet" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AssignOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="DelivererId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="DeliveryTime" Type="float" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chef">
+          <Key>
+            <PropertyRef Name="ChefId" />
+          </Key>
+          <Property Name="ChefId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="DeliveryTeam">
+          <Key>
+            <PropertyRef Name="DelivererId" />
+          </Key>
+          <Property Name="DelivererId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemsDetail">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="ItemQuantity" Type="int" Nullable="false" />
+          <Property Name="Payment" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PassOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="ChefId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PreparationTime" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlaceOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="RequiredDate" Type="datetime" />
+          <Property Name="Feedback" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierId" />
+          </Key>
+          <Property Name="SupplierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierCategory">
+          <Key>
+            <PropertyRef Name="CatId" />
+          </Key>
+          <Property Name="CatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierItems">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId">
+          <End Role="AdminOrder" Type="Self.AdminOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdminOrderDetail" Type="Self.AdminOrderDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AdminOrder">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="AdminOrderDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId">
+          <End Role="SupplierItems" Type="Self.SupplierItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdminOrderDetail" Type="Self.AdminOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierItems">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="AdminOrderDetail">
+              <PropertyRef Name="SuppItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AssignOrder_dbo_DeliveryTeam_DelivererId">
+          <End Role="DeliveryTeam" Type="Self.DeliveryTeam" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AssignOrder" Type="Self.AssignOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryTeam">
+              <PropertyRef Name="DelivererId" />
+            </Principal>
+            <Dependent Role="AssignOrder">
+              <PropertyRef Name="DelivererId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId">
+          <End Role="PlaceOrder" Type="Self.PlaceOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AssignOrder" Type="Self.AssignOrder" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceOrder">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="AssignOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ItemsDetail_dbo_Category_CategoryId">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ItemsDetail" Type="Self.ItemsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="ItemsDetail">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId">
+          <End Role="PlaceOrder" Type="Self.PlaceOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceOrder">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PassOrder_dbo_Chef_ChefId">
+          <End Role="Chef" Type="Self.Chef" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PassOrder" Type="Self.PassOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chef">
+              <PropertyRef Name="ChefId" />
+            </Principal>
+            <Dependent Role="PassOrder">
+              <PropertyRef Name="ChefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PassOrder_dbo_ItemsDetail_ItemId">
+          <End Role="ItemsDetail" Type="Self.ItemsDetail" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PassOrder" Type="Self.PassOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemsDetail">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="PassOrder">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PlaceOrder_dbo_Customer_CustomerId">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PlaceOrder" Type="Self.PlaceOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="PlaceOrder">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SupplierItems_dbo_SupplierCategory_CatId">
+          <End Role="SupplierCategory" Type="Self.SupplierCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SupplierItems" Type="Self.SupplierItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierCategory">
+              <PropertyRef Name="CatId" />
+            </Principal>
+            <Dependent Role="SupplierItems">
+              <PropertyRef Name="CatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB22ModelStoreContainer">
+          <EntitySet Name="AdminOrder" EntityType="Self.AdminOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminOrderDetail" EntityType="Self.AdminOrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssignOrder" EntityType="Self.AssignOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chef" EntityType="Self.Chef" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryTeam" EntityType="Self.DeliveryTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemsDetail" EntityType="Self.ItemsDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PassOrder" EntityType="Self.PassOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlaceOrder" EntityType="Self.PlaceOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierCategory" EntityType="Self.SupplierCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierItems" EntityType="Self.SupplierItems" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId" Association="Self.FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId">
+            <End Role="AdminOrder" EntitySet="AdminOrder" />
+            <End Role="AdminOrderDetail" EntitySet="AdminOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId" Association="Self.FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId">
+            <End Role="SupplierItems" EntitySet="SupplierItems" />
+            <End Role="AdminOrderDetail" EntitySet="AdminOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AssignOrder_dbo_DeliveryTeam_DelivererId" Association="Self.FK_dbo_AssignOrder_dbo_DeliveryTeam_DelivererId">
+            <End Role="DeliveryTeam" EntitySet="DeliveryTeam" />
+            <End Role="AssignOrder" EntitySet="AssignOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId" Association="Self.FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId">
+            <End Role="PlaceOrder" EntitySet="PlaceOrder" />
+            <End Role="AssignOrder" EntitySet="AssignOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ItemsDetail_dbo_Category_CategoryId" Association="Self.FK_dbo_ItemsDetail_dbo_Category_CategoryId">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="ItemsDetail" EntitySet="ItemsDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId" Association="Self.FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId">
+            <End Role="PlaceOrder" EntitySet="PlaceOrder" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PassOrder_dbo_Chef_ChefId" Association="Self.FK_dbo_PassOrder_dbo_Chef_ChefId">
+            <End Role="Chef" EntitySet="Chef" />
+            <End Role="PassOrder" EntitySet="PassOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PassOrder_dbo_ItemsDetail_ItemId" Association="Self.FK_dbo_PassOrder_dbo_ItemsDetail_ItemId">
+            <End Role="ItemsDetail" EntitySet="ItemsDetail" />
+            <End Role="PassOrder" EntitySet="PassOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PlaceOrder_dbo_Customer_CustomerId" Association="Self.FK_dbo_PlaceOrder_dbo_Customer_CustomerId">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="PlaceOrder" EntitySet="PlaceOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SupplierItems_dbo_SupplierCategory_CatId" Association="Self.FK_dbo_SupplierItems_dbo_SupplierCategory_CatId">
+            <End Role="SupplierCategory" EntitySet="SupplierCategory" />
+            <End Role="SupplierItems" EntitySet="SupplierItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB22Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AdminOrderDetail" Relationship="Self.FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId" FromRole="AdminOrder" ToRole="AdminOrderDetail" />
+        </EntityType>
+        <EntityType Name="AdminOrderDetail">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="SuppItemId" Type="Int32" Nullable="false" />
+          <Property Name="Paymnet" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AdminOrder" Relationship="Self.FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId" FromRole="AdminOrderDetail" ToRole="AdminOrder" />
+          <NavigationProperty Name="SupplierItem" Relationship="Self.FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId" FromRole="AdminOrderDetail" ToRole="SupplierItems" />
+        </EntityType>
+        <EntityType Name="AssignOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="DelivererId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="DeliveryTime" Type="Double" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DeliveryTeam" Relationship="Self.FK_dbo_AssignOrder_dbo_DeliveryTeam_DelivererId" FromRole="AssignOrder" ToRole="DeliveryTeam" />
+          <NavigationProperty Name="PlaceOrder" Relationship="Self.FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId" FromRole="AssignOrder" ToRole="PlaceOrder" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ItemsDetails" Relationship="Self.FK_dbo_ItemsDetail_dbo_Category_CategoryId" FromRole="Category" ToRole="ItemsDetail" />
+        </EntityType>
+        <EntityType Name="Chef">
+          <Key>
+            <PropertyRef Name="ChefId" />
+          </Key>
+          <Property Name="ChefId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PassOrders" Relationship="Self.FK_dbo_PassOrder_dbo_Chef_ChefId" FromRole="Chef" ToRole="PassOrder" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PlaceOrders" Relationship="Self.FK_dbo_PlaceOrder_dbo_Customer_CustomerId" FromRole="Customer" ToRole="PlaceOrder" />
+        </EntityType>
+        <EntityType Name="DeliveryTeam">
+          <Key>
+            <PropertyRef Name="DelivererId" />
+          </Key>
+          <Property Name="DelivererId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AssignOrders" Relationship="Self.FK_dbo_AssignOrder_dbo_DeliveryTeam_DelivererId" FromRole="DeliveryTeam" ToRole="AssignOrder" />
+        </EntityType>
+        <EntityType Name="ItemsDetail">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_dbo_ItemsDetail_dbo_Category_CategoryId" FromRole="ItemsDetail" ToRole="Category" />
+          <NavigationProperty Name="PassOrders" Relationship="Self.FK_dbo_PassOrder_dbo_ItemsDetail_ItemId" FromRole="ItemsDetail" ToRole="PassOrder" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="ItemQuantity" Type="Int32" Nullable="false" />
+          <Property Name="Payment" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PlaceOrder" Relationship="Self.FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId" FromRole="OrderDetail" ToRole="PlaceOrder" />
+        </EntityType>
+        <EntityType Name="PassOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="ChefId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PreparationTime" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Chef" Relationship="Self.FK_dbo_PassOrder_dbo_Chef_ChefId" FromRole="PassOrder" ToRole="Chef" />
+          <NavigationProperty Name="ItemsDetail" Relationship="Self.FK_dbo_PassOrder_dbo_ItemsDetail_ItemId" FromRole="PassOrder" ToRole="ItemsDetail" />
+        </EntityType>
+        <EntityType Name="PlaceOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+          <Property Name="Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AssignOrder" Relationship="Self.FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId" FromRole="PlaceOrder" ToRole="AssignOrder" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_PlaceOrder_dbo_Customer_CustomerId" FromRole="PlaceOrder" ToRole="Customer" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId" FromRole="PlaceOrder" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierId" />
+          </Key>
+          <Property Name="SupplierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierCategory">
+          <Key>
+            <PropertyRef Name="CatId" />
+          </Key>
+          <Property Name="CatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SupplierItems" Relationship="Self.FK_dbo_SupplierItems_dbo_SupplierCategory_CatId" FromRole="SupplierCategory" ToRole="SupplierItems" />
+        </EntityType>
+        <EntityType Name="SupplierItem">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AdminOrderDetails" Relationship="Self.FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId" FromRole="SupplierItems" ToRole="AdminOrderDetail" />
+          <NavigationProperty Name="SupplierCategory" Relationship="Self.FK_dbo_SupplierItems_dbo_SupplierCategory_CatId" FromRole="SupplierItems" ToRole="SupplierCategory" />
+        </EntityType>
+        <Association Name="FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId">
+          <End Role="AdminOrder" Type="Self.AdminOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdminOrderDetail" Type="Self.AdminOrderDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AdminOrder">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="AdminOrderDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId">
+          <End Role="SupplierItems" Type="Self.SupplierItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdminOrderDetail" Type="Self.AdminOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierItems">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="AdminOrderDetail">
+              <PropertyRef Name="SuppItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AssignOrder_dbo_DeliveryTeam_DelivererId">
+          <End Role="DeliveryTeam" Type="Self.DeliveryTeam" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AssignOrder" Type="Self.AssignOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryTeam">
+              <PropertyRef Name="DelivererId" />
+            </Principal>
+            <Dependent Role="AssignOrder">
+              <PropertyRef Name="DelivererId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId">
+          <End Role="PlaceOrder" Type="Self.PlaceOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AssignOrder" Type="Self.AssignOrder" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceOrder">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="AssignOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ItemsDetail_dbo_Category_CategoryId">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ItemsDetail" Type="Self.ItemsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="ItemsDetail">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PassOrder_dbo_Chef_ChefId">
+          <End Role="Chef" Type="Self.Chef" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PassOrder" Type="Self.PassOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chef">
+              <PropertyRef Name="ChefId" />
+            </Principal>
+            <Dependent Role="PassOrder">
+              <PropertyRef Name="ChefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PlaceOrder_dbo_Customer_CustomerId">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PlaceOrder" Type="Self.PlaceOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="PlaceOrder">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PassOrder_dbo_ItemsDetail_ItemId">
+          <End Role="ItemsDetail" Type="Self.ItemsDetail" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PassOrder" Type="Self.PassOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemsDetail">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="PassOrder">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId">
+          <End Role="PlaceOrder" Type="Self.PlaceOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceOrder">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SupplierItems_dbo_SupplierCategory_CatId">
+          <End Role="SupplierCategory" Type="Self.SupplierCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SupplierItems" Type="Self.SupplierItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierCategory">
+              <PropertyRef Name="CatId" />
+            </Principal>
+            <Dependent Role="SupplierItems">
+              <PropertyRef Name="CatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB22Entities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminOrders" EntityType="Self.AdminOrder" />
+          <EntitySet Name="AdminOrderDetails" EntityType="Self.AdminOrderDetail" />
+          <EntitySet Name="AssignOrders" EntityType="Self.AssignOrder" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Chefs" EntityType="Self.Chef" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DeliveryTeams" EntityType="Self.DeliveryTeam" />
+          <EntitySet Name="ItemsDetails" EntityType="Self.ItemsDetail" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="PassOrders" EntityType="Self.PassOrder" />
+          <EntitySet Name="PlaceOrders" EntityType="Self.PlaceOrder" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="SupplierCategories" EntityType="Self.SupplierCategory" />
+          <EntitySet Name="SupplierItems" EntityType="Self.SupplierItem" />
+          <AssociationSet Name="FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId" Association="Self.FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId">
+            <End Role="AdminOrder" EntitySet="AdminOrders" />
+            <End Role="AdminOrderDetail" EntitySet="AdminOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId" Association="Self.FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId">
+            <End Role="SupplierItems" EntitySet="SupplierItems" />
+            <End Role="AdminOrderDetail" EntitySet="AdminOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AssignOrder_dbo_DeliveryTeam_DelivererId" Association="Self.FK_dbo_AssignOrder_dbo_DeliveryTeam_DelivererId">
+            <End Role="DeliveryTeam" EntitySet="DeliveryTeams" />
+            <End Role="AssignOrder" EntitySet="AssignOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId" Association="Self.FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId">
+            <End Role="PlaceOrder" EntitySet="PlaceOrders" />
+            <End Role="AssignOrder" EntitySet="AssignOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ItemsDetail_dbo_Category_CategoryId" Association="Self.FK_dbo_ItemsDetail_dbo_Category_CategoryId">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="ItemsDetail" EntitySet="ItemsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PassOrder_dbo_Chef_ChefId" Association="Self.FK_dbo_PassOrder_dbo_Chef_ChefId">
+            <End Role="Chef" EntitySet="Chefs" />
+            <End Role="PassOrder" EntitySet="PassOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PlaceOrder_dbo_Customer_CustomerId" Association="Self.FK_dbo_PlaceOrder_dbo_Customer_CustomerId">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="PlaceOrder" EntitySet="PlaceOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PassOrder_dbo_ItemsDetail_ItemId" Association="Self.FK_dbo_PassOrder_dbo_ItemsDetail_ItemId">
+            <End Role="ItemsDetail" EntitySet="ItemsDetails" />
+            <End Role="PassOrder" EntitySet="PassOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId" Association="Self.FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId">
+            <End Role="PlaceOrder" EntitySet="PlaceOrders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SupplierItems_dbo_SupplierCategory_CatId" Association="Self.FK_dbo_SupplierItems_dbo_SupplierCategory_CatId">
+            <End Role="SupplierCategory" EntitySet="SupplierCategories" />
+            <End Role="SupplierItems" EntitySet="SupplierItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB22ModelStoreContainer" CdmEntityContainer="DB22Entities3">
+          <EntitySetMapping Name="AdminOrders">
+            <EntityTypeMapping TypeName="DB22Model.AdminOrder">
+              <MappingFragment StoreEntitySet="AdminOrder">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminOrderDetails">
+            <EntityTypeMapping TypeName="DB22Model.AdminOrderDetail">
+              <MappingFragment StoreEntitySet="AdminOrderDetail">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="SuppItemId" ColumnName="SuppItemId" />
+                <ScalarProperty Name="Paymnet" ColumnName="Paymnet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssignOrders">
+            <EntityTypeMapping TypeName="DB22Model.AssignOrder">
+              <MappingFragment StoreEntitySet="AssignOrder">
+                <ScalarProperty Name="DelivererId" ColumnName="DelivererId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DB22Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chefs">
+            <EntityTypeMapping TypeName="DB22Model.Chef">
+              <MappingFragment StoreEntitySet="Chef">
+                <ScalarProperty Name="ChefId" ColumnName="ChefId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DB22Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryTeams">
+            <EntityTypeMapping TypeName="DB22Model.DeliveryTeam">
+              <MappingFragment StoreEntitySet="DeliveryTeam">
+                <ScalarProperty Name="DelivererId" ColumnName="DelivererId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemsDetails">
+            <EntityTypeMapping TypeName="DB22Model.ItemsDetail">
+              <MappingFragment StoreEntitySet="ItemsDetail">
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="DB22Model.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PassOrders">
+            <EntityTypeMapping TypeName="DB22Model.PassOrder">
+              <MappingFragment StoreEntitySet="PassOrder">
+                <ScalarProperty Name="ChefId" ColumnName="ChefId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PreparationTime" ColumnName="PreparationTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaceOrders">
+            <EntityTypeMapping TypeName="DB22Model.PlaceOrder">
+              <MappingFragment StoreEntitySet="PlaceOrder">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="DB22Model.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierCategories">
+            <EntityTypeMapping TypeName="DB22Model.SupplierCategory">
+              <MappingFragment StoreEntitySet="SupplierCategory">
+                <ScalarProperty Name="CatId" ColumnName="CatId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierItems">
+            <EntityTypeMapping TypeName="DB22Model.SupplierItem">
+              <MappingFragment StoreEntitySet="SupplierItems">
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="CatId" ColumnName="CatId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

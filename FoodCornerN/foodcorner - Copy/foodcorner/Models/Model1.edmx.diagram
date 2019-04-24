@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ff8ee7d93ca445ce81de4fc6e274ce95" Name="Diagram1">
+        <EntityTypeShape EntityType="DB22Model.AdminOrder" Width="1.5" PointX="10" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.AdminOrderDetail" Width="1.5" PointX="12.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.AssignOrder" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.Category" Width="1.5" PointX="5.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.Chef" Width="1.5" PointX="8" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.Customer" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.DeliveryTeam" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.ItemsDetail" Width="1.5" PointX="8" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.OrderDetail" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.PassOrder" Width="1.5" PointX="10.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.PlaceOrder" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.Supplier" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.SupplierCategory" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB22Model.SupplierItem" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="DB22Model.FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB22Model.FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB22Model.FK_dbo_AssignOrder_dbo_DeliveryTeam_DelivererId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB22Model.FK_dbo_AssignOrder_dbo_PlaceOrder_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB22Model.FK_dbo_ItemsDetail_dbo_Category_CategoryId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB22Model.FK_dbo_PassOrder_dbo_Chef_ChefId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB22Model.FK_dbo_PlaceOrder_dbo_Customer_CustomerId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB22Model.FK_dbo_PassOrder_dbo_ItemsDetail_ItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB22Model.FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB22Model.FK_dbo_SupplierItems_dbo_SupplierCategory_CatId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
