@@ -204,6 +204,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsDetailsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SupplierCategoriesController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +214,18 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminOrderDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AssignOrder.cs">
@@ -227,6 +240,9 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DeliveryTeam.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -234,6 +250,7 @@
     <Compile Include="Models\ItemsDetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ItemsDetails.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -559,9 +576,18 @@
     <Content Include="Views\DeliveryTeams\Details.cshtml" />
     <Content Include="Views\DeliveryTeams\Edit.cshtml" />
     <Content Include="Views\DeliveryTeams\Index.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\Suppliers\Welcome.cshtml" />
+    <Content Include="Views\SupplierCategories\Create.cshtml" />
+    <Content Include="Views\SupplierCategories\Delete.cshtml" />
+    <Content Include="Views\SupplierCategories\Details.cshtml" />
+    <Content Include="Views\SupplierCategories\Edit.cshtml" />
+    <Content Include="Views\SupplierCategories\Index.cshtml" />
+=======
     <Content Include="Views\Suppliers\viewsuppliermenu.cshtml" />
     <Content Include="Views\Suppliers\ViewCategory.cshtml" />
     <Content Include="Views\Suppliers\ViewItems.cshtml" />
+>>>>>>> 218c2c703ed5a227653c587ea102c023694c0360
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

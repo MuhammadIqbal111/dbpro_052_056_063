@@ -196,8 +196,16 @@ namespace foodcorner.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
+        public ActionResult ViewDeliveryTeam()
+        {
+            return View();
+        }
+       
+=======
         
         
+>>>>>>> 218c2c703ed5a227653c587ea102c023694c0360
 
             // GET: Admin/Details/5
             public ActionResult Details(int? id)

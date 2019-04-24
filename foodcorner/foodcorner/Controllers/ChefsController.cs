@@ -19,6 +19,13 @@ namespace foodcorner.Controllers
         {
             return View(db.Chefs.ToList());
         }
+        public ActionResult Welcome(string id)
+        {
+
+            Chef sp = new Chef();
+            sp.ChefId = db.Chefs.FirstOrDefault(x => x.Id.Equals(id)).ChefId;
+            return View(sp);
+        }
 
         // GET: Chefs/Details/5
         public ActionResult Details(int? id)

@@ -17,10 +17,7 @@ namespace foodcorner.Models
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
 
-     
-
-        public partial class ItemsDetail
-
+    public partial class ItemsDetail
     {
         public DB22Entities3 db = new DB22Entities3();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

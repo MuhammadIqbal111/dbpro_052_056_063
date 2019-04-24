@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using foodcorner.Models;
 
 namespace foodcorner.Controllers
@@ -19,6 +20,22 @@ namespace foodcorner.Controllers
         {
             return View(db.Suppliers.ToList());
         }
+<<<<<<< HEAD
+        public ActionResult Welcome(string id)
+        {
+
+            Supplier sp = new Supplier();
+            sp.SupplierId = db.Suppliers.FirstOrDefault(x => x.Id.Equals(id)).SupplierId;
+            return View(sp);
+        }
+            
+
+        public ActionResult ViewMenu(string id)
+        {
+            Supplier supplier = db.Suppliers.Find(id);
+            return View(supplier);
+        }
+=======
         public ActionResult welcome()
         {
             return View(db.SupplierCategories.ToList());
@@ -29,6 +46,7 @@ namespace foodcorner.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+>>>>>>> 218c2c703ed5a227653c587ea102c023694c0360
 
             Supplier cat = db.Suppliers.Find(id);
             if (cat == null)

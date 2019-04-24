@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7ac3fa0ca6e8410cadd51c1ccfb3e26f" Name="Diagram1">
+      <Diagram DiagramId="6c87725ccaf44a02a750b23d47d8a9e4" Name="Diagram1">
         <EntityTypeShape EntityType="DB22Model.AdminOrder" Width="1.5" PointX="10" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DB22Model.AdminOrderDetail" Width="1.5" PointX="12.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DB22Model.AssignOrder" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
@@ -30,6 +30,14 @@
         <AssociationConnector Association="DB22Model.FK_dbo_PassOrder_dbo_ItemsDetail_ItemId" ManuallyRouted="false" />
         <AssociationConnector Association="DB22Model.FK_dbo_OrderDetail_dbo_PlaceOrder_OrderId" ManuallyRouted="false" />
         <AssociationConnector Association="DB22Model.FK_dbo_SupplierItems_dbo_SupplierCategory_CatId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DB22Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="DB22Model.AspNetRole" Width="1.5" PointX="12.75" PointY="6.5" />
+        <EntityTypeShape EntityType="DB22Model.AspNetUserClaim" Width="1.5" PointX="17.25" PointY="7.625" />
+        <EntityTypeShape EntityType="DB22Model.AspNetUserLogin" Width="1.5" PointX="17.25" PointY="5" />
+        <EntityTypeShape EntityType="DB22Model.AspNetUser" Width="1.5" PointX="15" PointY="5.375" />
+        <AssociationConnector Association="DB22Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB22Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB22Model.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

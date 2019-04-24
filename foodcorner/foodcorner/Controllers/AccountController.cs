@@ -80,19 +80,24 @@ namespace foodcorner.Controllers
                     {
                         if (UserManager.IsInRole(user.Id, "Customer"))
                         {
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Welcome", "Customers", new { id = user.Id });
                         }
                         if (UserManager.IsInRole(user.Id, "Chef"))
                         {
-                            return RedirectToAction("About", "Home");
+                            return RedirectToAction("Welcome", "Chefs", new { id = user.Id });
                         }
                         if (UserManager.IsInRole(user.Id, "Supplier"))
                         {
-                            return RedirectToAction("Contact", "Home");
+                            
+                            return RedirectToAction("Welcome", "Suppliers",new { id = user.Id });
                         }
                         if (UserManager.IsInRole(user.Id, "Delivery"))
                         {
-                            return RedirectToAction("Register", "Account");
+                            return RedirectToAction("Welcome", "DeliveryTeam", new { id = user.Id });
+                        }
+                        if (UserManager.IsInRole(user.Id, "Admin"))
+                        {
+                            return RedirectToAction("Welcome", "Admin");
                         }
                     }
                     else
@@ -227,8 +232,7 @@ namespace foodcorner.Controllers
                         db1.Suppliers.Add(che);
                         db1.SaveChanges();
                         await UserManager.AddToRoleAsync(user.Id, "Supplier");
-                        //db1.SaveChanges();
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Welcome", "Suppliers", new { id = user.Id });
 
                     }
 
