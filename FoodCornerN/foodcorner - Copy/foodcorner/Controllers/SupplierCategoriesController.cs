@@ -123,8 +123,83 @@ namespace foodcorner.Controllers
             return View(supplierItem);
         }
 
-            // GET: SupplierCategories/Edit/5
-            public ActionResult Edit(int? id)
+        [HttpGet]
+        public ActionResult Edit1(int? id, int? idd)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SupplierCategory cat = db.SupplierCategories.Find(idd);
+            SupplierItem itemsDetail = db.SupplierItems.Find(id);
+            Session["imagepath"] = itemsDetail.Image;
+            itemsDetail.CatId = cat.CatId;
+            if (itemsDetail == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CatId = new SelectList(db.SupplierCategories, "CatId", "Name", itemsDetail.CatId);
+            return View(itemsDetail);
+        }
+        // POST: ItemsDetails/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit1([Bind(Include = "ItemId, CatId,Name,Description,Price,ImageFile")] SupplierItem supplierItem)
+        {
+            if (ModelState.IsValid)
+            {
+                if (supplierItem.ImageFile != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(supplierItem.ImageFile.FileName);
+                    string extension = Path.GetExtension(supplierItem.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    supplierItem.Image = "~/Images/" + fileName;
+                    //var supportedType = new[] { "jpg", "jpeg", "png" };
+
+                    fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                    db.Entry(supplierItem).State = EntityState.Modified;
+                    if (db.SaveChanges() > 0)
+                    {
+                        supplierItem.ImageFile.SaveAs(fileName);
+                        return RedirectToAction("ViewItems", new { id = supplierItem.CatId });
+                    }
+
+
+                }
+
+                else
+                {
+                    supplierItem.Image = Session["imagepath"].ToString();
+                    db.Entry(supplierItem).State = EntityState.Modified;
+                    if (db.SaveChanges() > 0)
+                    {
+                        return RedirectToAction("ViewItems", new { id = supplierItem.CatId });
+                    }
+                }
+
+
+            }
+            ViewBag.CategoryId = new SelectList(db.Categories, "CatId", "Name", supplierItem.CatId);
+            return View(supplierItem);
+        }
+        public ActionResult Delete1(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SupplierItem supplierItem = db.SupplierItems.Find(id);
+            if (supplierItem == null)
+            {
+                return HttpNotFound();
+            }
+            return View(supplierItem);
+        }
+
+        // GET: SupplierCategories/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {

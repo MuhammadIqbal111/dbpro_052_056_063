@@ -572,6 +572,8 @@
     <Content Include="Views\SupplierCategories\Index.cshtml" />
     <Content Include="Views\SupplierCategories\ViewItems.cshtml" />
     <Content Include="Views\SupplierCategories\Create1.cshtml" />
+    <Content Include="Views\SupplierCategories\Edit1.cshtml" />
+    <Content Include="Views\SupplierCategories\Delete1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
