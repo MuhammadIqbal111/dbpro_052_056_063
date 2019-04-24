@@ -6,6 +6,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.IO;
 using System.Web.Mvc;
 using foodcorner.Models;
 
@@ -101,33 +102,38 @@ namespace foodcorner.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create1([Bind(Include = "CategoryId,Name,Description,Price,Quantity,Image")] ItemsDetail itemsDetail)
+        public ActionResult Create1([Bind(Include = "CategoryId,Name,Description,Price,Quantity,ImageFile")] ItemsDetail itemsDetail)
         {
 
             if (ModelState.IsValid)
             {
-                db.ItemsDetails.Add(itemsDetail);
-                try {
+                string fileName = Path.GetFileNameWithoutExtension(itemsDetail.ImageFile.FileName);
+                string extension = Path.GetExtension(itemsDetail.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                itemsDetail.Image = "~/Images/" + fileName;
+                var supportedType = new[] { "jpg", "jpeg", "png" };
+                if(!supportedType.Contains(extension))
+                {
+                    fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                    itemsDetail.ImageFile.SaveAs(fileName);
+
+                    db.ItemsDetails.Add(itemsDetail);
                     db.SaveChanges();
+                    return RedirectToAction("ViewItems", new { id = itemsDetail.CategoryId });
+                }
+                else
+                {
+                    ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", itemsDetail.CategoryId);
+                    return View(itemsDetail);
                 }
                 
-                 catch (DbEntityValidationException dbEx)
-                {
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            System.Console.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
-                        }
-                    }
-                }
-                return RedirectToAction("ViewItems",new { id = itemsDetail.CategoryId });
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", itemsDetail.CategoryId);
-            return RedirectToAction("View", "Create1");
+            return View(itemsDetail);
         }
 
+        [HttpGet]
         public ActionResult Edit1(int? id, int? idd)
         {
             if (id == null)
@@ -136,6 +142,7 @@ namespace foodcorner.Controllers
             }
             Category cat = db.Categories.Find(idd);
             ItemsDetail itemsDetail = db.ItemsDetails.Find(id);
+            Session["imagepath"] = itemsDetail.Image;
             itemsDetail.CategoryId = cat.CategoryId;
             if (itemsDetail == null)
             {
@@ -149,13 +156,45 @@ namespace foodcorner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit1([Bind(Include = "ItemId, CategoryId,Name,Description,Price,Quantity,Image")] ItemsDetail itemsDetail)
+        public ActionResult Edit1([Bind(Include = "ItemId, CategoryId,Name,Description,Price,Quantity,ImageFile")] ItemsDetail itemsDetail)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(itemsDetail).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("ViewItems", new { id = itemsDetail.CategoryId }); ;
+                if(itemsDetail.ImageFile != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(itemsDetail.ImageFile.FileName);
+                    string extension = Path.GetExtension(itemsDetail.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    itemsDetail.Image = "~/Images/" + fileName;
+                    var supportedType = new[] { "jpg", "jpeg", "png" };
+                    if (!supportedType.Contains(extension))
+                    {
+                        fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                        db.Entry(itemsDetail).State = EntityState.Modified;
+                        if (db.SaveChanges() > 0)
+                        {
+                            itemsDetail.ImageFile.SaveAs(fileName);
+                            return RedirectToAction("ViewItems", new { id = itemsDetail.CategoryId });
+                        }
+                    }
+                    else
+                    {
+                        return View(itemsDetail);
+                    }
+                    
+                }
+
+                else
+                {
+                    itemsDetail.Image = Session["imagepath"].ToString();
+                    db.Entry(itemsDetail).State = EntityState.Modified;
+                    if(db.SaveChanges() > 0)
+                    {
+                        return RedirectToAction("ViewItems", new { id = itemsDetail.CategoryId });
+                    }
+                }
+                
+                 
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", itemsDetail.CategoryId);
             return View(itemsDetail);

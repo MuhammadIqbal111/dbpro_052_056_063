@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.IO;
 using System.Web.Mvc;
 using foodcorner.Models;
 
@@ -37,6 +38,7 @@ namespace foodcorner.Controllers
         }
 
         // GET: ItemsDetails/Create
+        [HttpGet]
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
@@ -48,10 +50,17 @@ namespace foodcorner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemId,CategoryId,Name,Description,Price,Quantity,Image")] ItemsDetail itemsDetail)
+        public ActionResult Create([Bind(Include = "ItemId,CategoryId,Name,Description,Price,Quantity,ImageFile")] ItemsDetail itemsDetail)
         {
             if (ModelState.IsValid)
             {
+                string fileName = Path.GetFileNameWithoutExtension(itemsDetail.ImageFile.FileName);
+                string extension = Path.GetExtension(itemsDetail.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                itemsDetail.Image = "~/Images/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                itemsDetail.ImageFile.SaveAs(fileName);
+   
                 db.ItemsDetails.Add(itemsDetail);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -31,6 +31,7 @@
                 <th style="font-family:Arial;font-size:24px">PRICE</th>
                 <th style="font-family:Arial;font-size:24px">QUANTITY</th>
                 <th style="font-family:Arial;font-size:24px">IMAGE</th>
+                <th style="font-family:Arial;font-size:24px">MANAGE</th>
 
             </tr>
             @foreach (var item in lst.ToList())
@@ -40,7 +41,7 @@
                 <td style="font-family:Arial;font-size:24px">@Html.DisplayFor(modelItem => item.Description)</td>
                 <td style="font-family:Arial;font-size:24px">@Html.DisplayFor(modelItem => item.Price)</td>
                 <td style="font-family:Arial;font-size:24px">@Html.DisplayFor(modelItem => item.Quantity)</td>
-                <td style="font-family:Arial;font-size:24px">@Html.DisplayFor(modelItem => item.Image)</td>
+                <td><img src="@Url.Content(item.Image)" width="200" height="100"></td>
                 <td>
                     @Html.ActionLink("Edit", "Edit1", new { id = item.ItemId, idd = item.CategoryId }) |
 
