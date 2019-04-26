@@ -1,3 +1,4 @@
+
 CREATE VIEW List_of_orders
 AS 
 SELECT p.OrderId, c.Name
