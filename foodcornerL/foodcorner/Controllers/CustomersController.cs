@@ -13,6 +13,9 @@ namespace foodcorner.Controllers
 {
     public class CustomersController : Controller
     {
+        int order;
+        int cus;
+        int bill = 0;
         private DB22Entities3 db = new DB22Entities3();
 
         // GET: Customers
@@ -35,14 +38,47 @@ namespace foodcorner.Controllers
             Customer customer = db.Customers.Find(model.CustomerId);
             customer.Address = model.Address;
             db.SaveChanges();
+            return RedirectToAction("cWelcome", new { id = customer.CustomerId }); 
+        }
+        public ActionResult cWelcome(int id)
+        {
+            Customer customer = db.Customers.Find(id);
             return View(customer);
         }
+
         public ActionResult PlaceOrder(int id)
         {
             OrderDetail od = new OrderDetail();
             od.CustomerId = id;
             db.SaveChanges();
-            
+            cus = od.CustomerId;
+            order = od.OrderId;
+
+            return View(db.Categories.ToList());
+
+        }
+        public ActionResult ViewItems(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Category cat = db.Categories.Find(id);
+            if (cat == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cat);
+        }
+        public ActionResult Addcart(int id, string Name, int p, int q)
+        {
+            PlaceOrder po = new PlaceOrder();
+            po.OrderId = order;
+            po.ItemId = id;
+            po.quantity = q;
+            bill = bill + (p * q);
+            db.SaveChanges();
             return View(db.Categories.ToList());
 
         }
