@@ -26,7 +26,13 @@ namespace foodcorner.Controllers
             sp.CustomerId= db.Customers.FirstOrDefault(x => x.Id.Equals(id)).CustomerId;
             return View(sp);
         }
+	public ActionResult Wel(string id)
+        {
 
+            Customer sp = new Customer();
+            sp.CustomerId= db.Customers.FirstOrDefault(x => x.Id.Equals(id)).CustomerId;
+            return View(sp);
+        }
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
