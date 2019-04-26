@@ -1,0 +1,120 @@
+﻿
+
+@{
+    ViewBag.Title = "WELCOME ADMIN";
+}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Register </title>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Font-->
+    <link rel="stylesheet" type="text/css" href="~/Content/csslr/nunito-font.css">
+    <!-- Main Style Css -->
+    <link rel="stylesheet" href="~/Content/csslr/style.css" />
+</head>
+<body class="form-v6">
+    <div class="page-content">
+        <div class="form-v6-content">
+            <div class="form-left">
+                <img src="~/Content/imageslr/form-v6.jpg" alt="form">
+            </div>
+            <form class="form-detail" action="#" method="post">
+                <h2>Register Form</h2>
+
+                
+                <div class="form-row">
+                    <li>@Html.ActionLink("View Menu", "Menu", "Admin")</li>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("View Customers", "ViewCustomers", "Admin")</li>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("View Orders", "ViewOrders", "Admin")</li>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("View Suppliers", "ViewSuppliers", "Admin")</li>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("View Chefs", "ViewChefs", "Admin")</li>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("View DeliveryTeam", "ViewDeliveryTeam", "Admin")</li>
+
+                </div>
+                <h3 style="color:darkblue;"><u>Generate Reports</u></h3>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("Admin Buy Products", "AdminBuyProduct", "Admin")</li>
+                </div>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("Delivered Orders", "DeliveredOrders", "Admin")</li>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("List Of Admin Food Items", "ListOfAdminFoodItems", "Admin")</li>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("List Of Chefs", "ListOfChefs", "Admin")</li>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("List Of Orders", "ListOfOrders", "Admin")</li>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <li>@Html.ActionLink("Most Demanding Food Item", "MostDemandingFoodItem", "Admin")</li>
+
+                </div>
+                <div class="form-row">
+                    <li>@Html.ActionLink("Not Done Orders", "NotDoneOrders", "Admin")</li>
+
+                </div>
+                <div class="form-row">
+                    <li>@Html.ActionLink("Customers With Maximum Orders", "CustomersWithMaximumOrders", "Admin")</li>
+
+                </div>
+
+                <div class="form-row">
+                    <li>@Html.ActionLink("Orders In A Day", "OrdersInADay", "Admin")</li>
+
+                </div>
+                <div class="form-row">
+                    <li>@Html.ActionLink("List Of Suppliers", "ListOfSuppliers", "Admin")</li>
+
+                </div>
+                <div class="form-row">
+                    <li>@Html.ActionLink("Undelivered Orders", "UndeliveredOrders", "Admin")</li>
+
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

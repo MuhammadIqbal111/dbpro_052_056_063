@@ -1,0 +1,75 @@
+﻿@using foodcorner.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Register </title>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Font-->
+    <link rel="stylesheet" type="text/css" href="~/Content/csslr/nunito-font.css">
+    <!-- Main Style Css -->
+    <link rel="stylesheet" href="~/Content/csslr/style.css" />
+</head>
+<body class="form-v6">
+    <div class="page-content">
+        <div class="form-v6-content">
+            <div class="form-left">
+                <img src="~/Content/imageslr/form-v6.jpg" alt="form">
+            </div>
+            <form class="form-detail" action="#" method="post">
+                <h2>Login Form</h2>
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-row">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <br />
+
+                    <div class="form-row">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <br />
+
+
+
+                    <div class="form-row-last">
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                    <br />
+                    <p>
+                        @Html.ActionLink("Register as a new user", "Register")
+                    </p>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                }
+            </form>
+            
+        </div>
+    </div>
+    <div class="col-md-4">
+    <section id="socialLoginForm">
+        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+    </section>
+    </div>
+</body>
+</html>
+
+             
+

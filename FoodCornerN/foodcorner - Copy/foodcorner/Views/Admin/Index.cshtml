@@ -1,0 +1,36 @@
+﻿@model IEnumerable<foodcorner.Models.Category>
+
+@{
+    ViewBag.Title = "VIEW MENU";
+}
+
+<h2>VIEW MENU</h2>
+
+<h1 style="margin-top:50px;font-family:Arial;font-size:35px; margin-bottom:50px;padding-top:45px; text-align:center;color:cornflowerblue"><b>CATEGORIES</b></h1>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-condensed">
+    <tr>
+
+        <td style="font-family:Arial;font-size:24px">Category Name</td>
+        <td style="font-family:Arial;font-size:24px">Manage</td>
+    </tr>
+   
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="font-family:Arial;font-size:20px">
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
+                @Html.ActionLink("View Items", "ViewItems", new { id = item.CategoryId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
+
+            </td>
+        </tr>
+    }
+
+</table>
