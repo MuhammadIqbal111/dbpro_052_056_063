@@ -1,0 +1,58 @@
+﻿@model foodcorner.Models.Category
+
+@{
+    ViewBag.Title = "ViewItems";
+}
+
+<h2>ViewItems</h2>
+
+
+
+@{
+    foodcorner.Models.ItemsDetail dg = new foodcorner.Models.ItemsDetail();
+
+    IEnumerable<foodcorner.Models.ItemsDetail> lst = dg.doctorsspec(Model.CategoryId);
+
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <p style="margin-top:50px;font-family:Arial;font-size:15px; margin-bottom:25px;padding-top:70px;padding-left:30px; text-align:left"><b>Category Name:@Html.DisplayFor(modelItem => Model.CategoryName)</b></p>
+    <p style="margin-top:25px;font-family:Arial;font-size:15px; margin-bottom:50px; padding-left:30px;text-align:left"><b> @Html.ActionLink("Add Items", "Create1", new { id = Model.CategoryId })</b></p>
+    <table class="table table-bordered table-condensed">
+        <tbody>
+            <tr>
+
+                <th style="font-family:Arial;font-size:24px">ITEM NAME</th>
+                <th style="font-family:Arial;font-size:24px">DESCRIPTION</th>
+                <th style="font-family:Arial;font-size:24px">PRICE</th>
+                <th style="font-family:Arial;font-size:24px">QUANTITY</th>
+                <th style="font-family:Arial;font-size:24px">IMAGE</th>
+                <th style="font-family:Arial;font-size:24px">MANAGE</th>
+
+            </tr>
+            @foreach (var item in lst.ToList())
+            {
+                <tr>
+                    <td style="font-family:Arial;font-size:24px">@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td style="font-family:Arial;font-size:24px">@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td style="font-family:Arial;font-size:24px">@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td style="font-family:Arial;font-size:24px">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td><img src="@Url.Content(item.Image)" width="200" height="100"></td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit1", new { id = item.ItemId, idd = item.CategoryId }) |
+
+                        @Html.ActionLink("Delete", "Delete1", new { id = item.ItemId })
+                    </td>
+
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+}
+

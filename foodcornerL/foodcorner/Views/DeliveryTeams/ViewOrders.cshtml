@@ -1,0 +1,41 @@
+﻿@model IEnumerable<foodcorner.Models.AssignOrder>
+
+@{
+    ViewBag.Title = "ViewOrders";
+}
+
+<h2>ViewOrders</h2>
+<p style="margin-top:50px;font-family:Arial;font-size:15px; margin-bottom:50px; padding-left:30px;text-align:left"> <h5>@ViewBag.msg</h5></p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryTeam.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDetail.State)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveryTeam.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDetail.State)
+        </td>
+        <td>
+            @Html.ActionLink("Done", "Done", new { id = item.OrderId }, new { idd = item.DelivererId })
+        </td>
+    </tr>
+}
+
+</table>
