@@ -1,4 +1,3 @@
-
 CREATE VIEW List_of_orders
 AS 
 SELECT p.OrderId, c.Name
@@ -16,9 +15,11 @@ where p.Status = 'Done';
 
 CREATE VIEW not_done_orders
 AS 
-SELECT OrderId, Name
-FROM PassOrder p JOIN ItemsDetail i ON(i.ItemId = p.ItemId)
-WHERE p.Status = 'Inprogress';
+SELECT o.OrderId
+FROM OrderDetail o 
+JOIN PassOrder p ON(o.OrderId = p.OrderId)
+WHERE p.Status = 'Inprogress'
+
 
 CREATE VIEW Admin_buy_products
 AS 
