@@ -21,6 +21,7 @@ namespace foodcorner.Controllers
         }
         public ActionResult Index1(int? id)
         {
+            
             return View(db.Chefs.ToList());
         }
         public ActionResult Assign(int id, int idd)
@@ -32,6 +33,17 @@ namespace foodcorner.Controllers
             p.Status = "Busy";
             db.SaveChanges();
             ViewBag.msg = "This order is assigned to this chef!";
+            return RedirectToAction("ViewOrders", "Admin");
+        }
+        public ActionResult AssignOrderDeli(int id, int idd)
+        {
+
+            AssignOrder p = new AssignOrder();
+            p.DelivererId = id;
+            p.OrderId = idd;
+            p.Status = "Not Delivered";
+            db.SaveChanges();
+            ViewBag.msg = "This order is assigned to this Delivery Team!";
             return RedirectToAction("ViewOrders", "Admin");
         }
 
