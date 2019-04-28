@@ -1,0 +1,44 @@
+﻿@model foodcorner.Models.PlaceOrder
+
+@{
+    ViewBag.Title = "Edit22";
+}
+
+<h2 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:40px; margin-bottom:50px;padding-top:100px; text-align:center;color:cornflowerblue"><b>EDIT </b></h2>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+
+
+        <div class="form-group" style="font-family:Arial;font-size:24px; padding-left:50px">
+            @Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 " style="font-family:Arial;font-size:24px; padding-left:50px">
+                @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        @Html.HiddenFor(model => model.PlaceId)
+        @Html.HiddenFor(model => model.OrderId)
+        @Html.HiddenFor(model => model.ItemId)
+        @Html.HiddenFor(model => model.Bill)
+
+
+        <div class="form-group" style="font-family:Arial;font-size:24px; padding-left:50px">
+            <div class="col-md-offset-2 col-md-10" style="font-family:Arial;font-size:50px; padding-left:20px">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <h1 style="font-family:Arial;font-size:24px;padding-right:50px;padding-bottom:100px">   </h1>
+}
+
+

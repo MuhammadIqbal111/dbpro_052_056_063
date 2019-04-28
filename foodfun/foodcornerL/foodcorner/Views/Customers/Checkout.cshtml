@@ -1,0 +1,17 @@
+﻿@model foodcorner.Models.OrderDetail
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h3 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:40px; margin-bottom:50px;padding-top:200px; text-align:center;color:cornflowerblue"><b> Your order has been placed. </b></h3>
+
+
+
+<h6 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:40px; margin-bottom:50px;padding-top:10px; text-align:center;color:Black">
+    The current state oy your order is:@Html.DisplayFor(model => model.State)
+</h6>
+
+<h6 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:40px; margin-bottom:50px;padding-top:10px; text-align:center;color:Black">
+    It will be deliverd ON:@Html.DisplayFor(model => model.RequiredDate)
+</h6>
