@@ -15,15 +15,16 @@
       <PropertyRef Name="OrderId" />
     </Key>
     <Property Name="OrderId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="AdminOrderDetail" Relationship="Self.FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId" FromRole="AdminOrder" ToRole="AdminOrderDetail" />
+    <NavigationProperty Name="AdminOrderDetails" Relationship="Self.FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId" FromRole="AdminOrder" ToRole="AdminOrderDetail" />
   </EntityType>
   <EntityType Name="AdminOrderDetail">
     <Key>
-      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="DId" />
     </Key>
     <Property Name="OrderId" Type="Int32" Nullable="false" />
     <Property Name="SuppItemId" Type="Int32" Nullable="false" />
     <Property Name="Payment" Type="Int32" Nullable="false" />
+    <Property Name="DId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="AdminOrder" Relationship="Self.FK_dbo_AdminOrderDetail_dbo_AdminOrder_OrderId" FromRole="AdminOrderDetail" ToRole="AdminOrder" />
     <NavigationProperty Name="SupplierItem" Relationship="Self.FK_dbo_AdminOrderDetail_dbo_SupplierItems_SuppItemId" FromRole="AdminOrderDetail" ToRole="SupplierItems" />
   </EntityType>
@@ -135,7 +136,6 @@
     <Property Name="Quantity" Type="Int32" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Category" Relationship="Self.FK_dbo_ItemsDetail_dbo_Category_CategoryId" FromRole="ItemsDetail" ToRole="Category" />
-    <NavigationProperty Name="PassOrders" Relationship="Self.FK_dbo_PassOrder_dbo_ItemsDetail_ItemId" FromRole="ItemsDetail" ToRole="PassOrder" />
     <NavigationProperty Name="PlaceOrders" Relationship="Self.FK_dbo_PlaceOrder_dbo_ItemsDetail_ItemId" FromRole="ItemsDetail" ToRole="PlaceOrder" />
   </EntityType>
   <EntityType Name="OrderDetail">
@@ -158,22 +158,20 @@
     </Key>
     <Property Name="ChefId" Type="Int32" Nullable="false" />
     <Property Name="OrderId" Type="Int32" Nullable="false" />
-    <Property Name="ItemId" Type="Int32" Nullable="false" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Chef" Relationship="Self.FK_dbo_PassOrder_dbo_Chef_ChefId" FromRole="PassOrder" ToRole="Chef" />
-    <NavigationProperty Name="ItemsDetail" Relationship="Self.FK_dbo_PassOrder_dbo_ItemsDetail_ItemId" FromRole="PassOrder" ToRole="ItemsDetail" />
     <NavigationProperty Name="OrderDetail" Relationship="Self.FK_dbo_PassOrder_dbo_OrderDetail_OrderId" FromRole="PassOrder" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="PlaceOrder">
     <Key>
-      <PropertyRef Name="OrderId" />
-      <PropertyRef Name="ItemId" />
+      <PropertyRef Name="PlaceId" />
     </Key>
     <Property Name="OrderId" Type="Int32" Nullable="false" />
     <Property Name="ItemId" Type="Int32" Nullable="false" />
     <Property Name="quantity" Type="Int32" Nullable="false" />
     <Property Name="Bill" Type="Int32" />
-    <Property Name="Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PlaceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="ItemsDetail" Relationship="Self.FK_dbo_PlaceOrder_dbo_ItemsDetail_ItemId" FromRole="PlaceOrder" ToRole="ItemsDetail" />
     <NavigationProperty Name="OrderDetail" Relationship="Self.FK_dbo_PlaceOrder_dbo_OrderDetail_OrderId" FromRole="PlaceOrder" ToRole="OrderDetail" />
   </EntityType>
@@ -210,7 +208,7 @@
     <End Role="AdminOrder" Type="Self.AdminOrder" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="AdminOrderDetail" Type="Self.AdminOrderDetail" Multiplicity="0..1" />
+    <End Role="AdminOrderDetail" Type="Self.AdminOrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AdminOrder">
         <PropertyRef Name="OrderId" />
@@ -332,20 +330,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_PassOrder_dbo_ItemsDetail_ItemId">
-    <End Role="ItemsDetail" Type="Self.ItemsDetail" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="PassOrder" Type="Self.PassOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ItemsDetail">
-        <PropertyRef Name="ItemId" />
-      </Principal>
-      <Dependent Role="PassOrder">
-        <PropertyRef Name="ItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_PlaceOrder_dbo_ItemsDetail_ItemId">
     <End Role="ItemsDetail" Type="Self.ItemsDetail" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -461,10 +445,6 @@
     <AssociationSet Name="FK_dbo_OrderDetail_dbo_Customer_CustomerId" Association="Self.FK_dbo_OrderDetail_dbo_Customer_CustomerId">
       <End Role="Customer" EntitySet="Customers" />
       <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_PassOrder_dbo_ItemsDetail_ItemId" Association="Self.FK_dbo_PassOrder_dbo_ItemsDetail_ItemId">
-      <End Role="ItemsDetail" EntitySet="ItemsDetails" />
-      <End Role="PassOrder" EntitySet="PassOrders" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_PlaceOrder_dbo_ItemsDetail_ItemId" Association="Self.FK_dbo_PlaceOrder_dbo_ItemsDetail_ItemId">
       <End Role="ItemsDetail" EntitySet="ItemsDetails" />

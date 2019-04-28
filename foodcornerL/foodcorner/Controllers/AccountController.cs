@@ -70,51 +70,37 @@ namespace foodcorner.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
-                if (user != null)
+                return View(model);
+            }
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            if (user != null)
+            {
+                if (UserManager.IsInRole(user.Id, "Customer"))
                 {
-                    await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-                    if (String.IsNullOrEmpty(returnUrl))
-                    {
-                        if (UserManager.IsInRole(user.Id, "Customer"))
-                        {
-                            return RedirectToAction("Welcome", "Customers", new { id = user.Id });
-                        }
-                        if (UserManager.IsInRole(user.Id, "Chef"))
-                        {
-                            return RedirectToAction("Welcome", "Chefs", new { id = user.Id });
-                        }
-                        if (UserManager.IsInRole(user.Id, "Supplier"))
-                        {
-
-                            return RedirectToAction("Welcome", "Suppliers");
-                        }
-                        if (UserManager.IsInRole(user.Id, "Delivery"))
-                        {
-                            return RedirectToAction("Welcome", "DeliveryTeam", new { id = user.Id });
-                        }
-                        if (UserManager.IsInRole(user.Id, "Admin"))
-                        {
-                            return RedirectToAction("Welcome", "Admin");
-                        }
-                    }
-                    else
-                    {
-                        return RedirectToLocal(returnUrl);
-                    }
+                    return RedirectToAction("Welcome", "Customers", new { id = user.Id });
                 }
-                else
+                if (UserManager.IsInRole(user.Id, "Chef"))
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    return RedirectToAction("Welcome", "Chefs", new { id = user.Id });
+                }
+                if (UserManager.IsInRole(user.Id, "Supplier"))
+                {
+                    return RedirectToAction("Welcome", "Suppliers");
+                }
+                if (UserManager.IsInRole(user.Id, "Delivery"))
+                {
+                    return RedirectToAction("Welcome", "DeliveryTeam", new { id = user.Id });
+                }
+                if (UserManager.IsInRole(user.Id, "Admin"))
+                {
+                    return RedirectToAction("Welcome", "Admin");
                 }
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
-    
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]

@@ -11,16 +11,31 @@ namespace foodcorner.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+    using System.Linq;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
+
     public partial class PlaceOrder
     {
+        public DB22Entities3 db = new DB22Entities3();
         public int OrderId { get; set; }
         public int ItemId { get; set; }
         public int quantity { get; set; }
         public Nullable<int> Bill { get; set; }
         public string Feedback { get; set; }
+        public int PlaceId { get; set; }
     
         public virtual ItemsDetail ItemsDetail { get; set; }
         public virtual OrderDetail OrderDetail { get; set; }
+
+        public IEnumerable<PlaceOrder> doctorsspec(int spec)
+        {
+            var ide = db.PlaceOrders.Where(p => (p.OrderId == spec));
+            return ide;
+        }
     }
 }

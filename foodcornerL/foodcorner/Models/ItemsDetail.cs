@@ -20,16 +20,14 @@ namespace foodcorner.Models
 
 
     public partial class ItemsDetail
-
     {
         public DB22Entities3 db = new DB22Entities3();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ItemsDetail()
         {
-            this.PassOrders = new HashSet<PassOrder>();
             this.PlaceOrders = new HashSet<PlaceOrder>();
         }
-
+    
         public int ItemId { get; set; }
         public int CategoryId { get; set; }
         public string Name { get; set; }
@@ -40,13 +38,12 @@ namespace foodcorner.Models
         public HttpPostedFileBase ImageFile { get; set; }
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PassOrder> PassOrders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlaceOrder> PlaceOrders { get; set; }
         public IEnumerable<ItemsDetail> doctorsspec(int spec)
         {
             var ide = db.ItemsDetails.Where(p => (p.CategoryId == spec));
             return ide;
         }
+
     }
 }

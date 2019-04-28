@@ -202,8 +202,10 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DeliveryTeamsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemsDetails1Controller.cs" />
     <Compile Include="Controllers\ItemsDetailsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PlaceOrdersController.cs" />
     <Compile Include="Controllers\SupplierCategoriesController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -595,6 +597,24 @@
     <Content Include="Views\DeliveryTeams\ViewOrders.cshtml" />
     <Content Include="Views\Customers\PlaceOrder.cshtml" />
     <Content Include="Views\Customers\ViewItems.cshtml" />
+    <Content Include="Views\Customers\ViewCart.cshtml" />
+    <Content Include="Views\ItemsDetails1\Create.cshtml" />
+    <Content Include="Views\ItemsDetails1\Delete.cshtml" />
+    <Content Include="Views\ItemsDetails1\Details.cshtml" />
+    <Content Include="Views\ItemsDetails1\Edit.cshtml" />
+    <Content Include="Views\ItemsDetails1\Index.cshtml" />
+    <Content Include="Views\Customers\Edit1.cshtml" />
+    <Content Include="Views\Customers\Edit22.cshtml" />
+    <Content Include="Views\PlaceOrders\Create.cshtml" />
+    <Content Include="Views\PlaceOrders\Delete.cshtml" />
+    <Content Include="Views\PlaceOrders\Details.cshtml" />
+    <Content Include="Views\PlaceOrders\Edit.cshtml" />
+    <Content Include="Views\PlaceOrders\Index.cshtml" />
+    <Content Include="Views\Customers\Delete22.cshtml" />
+    <Content Include="Views\Customers\ViewOrder.cshtml" />
+    <Content Include="Views\Customers\GetDetails.cshtml" />
+    <Content Include="Views\Customers\Edit33.cshtml" />
+    <Content Include="Views\Customers\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
