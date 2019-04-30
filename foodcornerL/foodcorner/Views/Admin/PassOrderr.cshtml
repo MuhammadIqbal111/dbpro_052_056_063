@@ -1,0 +1,40 @@
+﻿
+@model foodcorner.Models.PlaceOrder
+@{
+    ViewBag.Title = "PassOrderr";
+}
+
+@{
+    foodcorner.Models.DeliveryTeam dg = new foodcorner.Models.DeliveryTeam();
+
+    IEnumerable<foodcorner.Models.DeliveryTeam> lst = dg.doctorsspec(Model.OrderId);
+
+}
+
+<table class="table">
+    <tr>
+
+        <th>
+        <th style="font-family:Arial;font-size:24px">TEAM NAME</th>
+        </th>
+        <th>
+        <th style="font-family:Arial;font-size:24px">MANAGE</th>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in lst)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+
+                @Html.ActionLink("Assign Order", "AssignOrder", new { id = item.DelivererId, idd = item.OrderId })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -26,5 +26,12 @@ namespace foodcorner.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssignOrder> AssignOrders { get; set; }
+
+        public IEnumerable<AssignOrder> doctorsspec(int spec)
+        {
+            var ide = db.AssignOrders.Where(p => (p.DelivererId == spec));
+            return ide;
+        }
+
     }
 }

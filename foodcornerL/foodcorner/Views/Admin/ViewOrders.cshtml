@@ -1,134 +1,65 @@
-﻿@model foodcorner.Models.OrderDetail
+﻿@model IEnumerable<foodcorner.Models.PlaceOrder>
 
 
 @{
-    ViewBag.Title = "ViewOrders";
-    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+    ViewBag.Title = "View Orders";
 }
-<br />
-<br />
-<h2 style="color:blue;"><u><center>Orders</center></u></h2>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        * {
-            box-sizing: border-box;
-        }
 
-        body {
-            background-color: #f1f1f1;
-            padding: 20px;
-            font-family: Arial;
-        }
+<h2>Index</h2>
 
-        /* Center website */
-        .main {
-            max-width: 1000px;
-            margin: auto;
-        }
+<p style="margin-top:50px;font-family:Arial;font-size:15px; margin-bottom:25px;padding-top:70px;padding-left:30px; text-align:left"><b> Delivery Teams</b></p>
 
-        h1 {
-            font-size: 50px;
-            word-break: break-all;
-        }
+<table class="table">
+    <tr>
+        <th style="font-family:Arial;font-size:24px">
+            @Html.DisplayNameFor(model => model.OrderId)
+        </th>
+        <th style="font-family:Arial;font-size:24px">
+            @Html.DisplayNameFor(model => model.OrderDetail.Customer.Name)
+        </th>
 
-        .row {
-            margin: 8px -16px;
-        }
+        <th style="font-family:Arial;font-size:24px">
+            @Html.DisplayNameFor(model => model.Bill)
+        </th>
+        <th style="font-family:Arial;font-size:24px">
+            @Html.DisplayNameFor(model => model.Feedback)
+        </th>
 
-            /* Add padding BETWEEN each column */
-            .row,
-            .row > .column {
-                padding: 8px;
-            }
+        <th style="font-family:Arial;font-size:24px">
+            @Html.DisplayNameFor(model => model.OrderDetail.State)
+        </th>
 
-        /* Create four equal columns that floats next to each other */
-        .column {
-            float: left;
-            width: 25%;
-        }
+        <th style="font-family:Arial;font-size:24px"> MANAGE </th>
+    </tr>
 
-        /* Clear floats after rows */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="font-family:Arial;font-size:24px">
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td style="font-family:Arial;font-size:24px">
+                @Html.DisplayFor(modelItem => item.OrderDetail.Customer.Name)
+            </td>
+            <td style="font-family:Arial;font-size:24px">
+                @Html.DisplayFor(modelItem => item.Bill)
+            </td>
+            <td style="font-family:Arial;font-size:24px">
+                @Html.DisplayFor(modelItem => item.Feedback)
+            </td>
 
-        /* Content */
-        .content {
-            background-color: white;
-            padding: 10px;
-        }
+            <td style="font-family:Arial;font-size:24px">
+                @Html.DisplayFor(modelItem => item.OrderDetail.State)
+            </td>
+            <td style="font-family:Arial;font-size:24px">
+                @Html.ActionLink("Assign Order To Chef", "AssignOrderr", new { id = item.OrderId  }) |
+                @Html.ActionLink("Pass Order To Deliverer", "PassOrderr", new { id = item.OrderId }) |
+                @Html.ActionLink("Order Detail", "OrderDet", new { id = item.OrderId })
+            </td>
+        </tr>
+    }
 
-        /* Responsive layout - makes a two column-layout instead of four columns */
-        @@media screen and (max-width: 900px) {
-            .column {
-                width: 50%;
-            }
-        }
-
-        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-        @@media screen and (max-width: 600px) {
-            .column {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-
-
-
-<h2>ViewOrders</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>OrderDetail</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.OrderId, "OrderId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("OrderId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.OrderId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ItemId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ItemId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ItemQuantity, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ItemQuantity, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Payment, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Payment, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Payment, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+</table>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

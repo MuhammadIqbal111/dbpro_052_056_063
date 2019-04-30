@@ -27,10 +27,70 @@ namespace foodcorner.Controllers
         {
             return View();
         }
-
+        public ActionResult Reports()
+        {
+            return RedirectToAction("Welcome", "Reports");
+        }
         public ActionResult ViewSupplierMenu()
         {
             return View();
+        }
+        
+        public ActionResult AssignOrderr(int id)
+        {
+            
+            List<Chef> list = new List<Chef>();
+            Chef c = new Chef();
+            PassOrder cat = db.PassOrders.Find(id);
+            if (cat != null)
+            {
+                ViewBag.msg = "This order has been assigned";
+                return RedirectToAction("ViewOrders", "Admin");
+            }
+            AdminOrder a = new AdminOrder
+            {
+                OrderId = id
+            };
+            ViewBag.Message = a;
+            return RedirectToAction("Index1", "Chefs");
+        }
+        public ActionResult PassOrderr(int id)
+        {
+            AdminOrder a = new AdminOrder
+            {
+                OrderId = id
+            };
+            ViewBag.Message = a;
+            return RedirectToAction("Index1", "Chefs");
+        }
+        public ActionResult ViewOrders()
+        {
+            return View(db.PlaceOrders.ToList());
+        }
+       
+        public ActionResult OrderDet(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            /*PlaceOrder cat = db.PlaceOrders.Find(id);
+            if (cat == null)
+            {
+                ViewBag.msg = "Could Not Found";
+                //return HttpNotFound();
+            }*/
+            List<PlaceOrder> list = new List<PlaceOrder>();
+            var books = db.PlaceOrders;
+            foreach (PlaceOrder b in books)
+            {
+                if (b.OrderId == id)
+                {
+                    list.Add(b);
+                }
+            }
+            return View(list);
         }
         public ActionResult ViewCustomers()
         {
@@ -42,10 +102,7 @@ namespace foodcorner.Controllers
             return RedirectToAction("Index", "Chefs");
 
         }
-        public ActionResult ViewOrders()
-        {
-            return View();
-        }
+       
         public ActionResult ViewSuppliers()
         {
             return RedirectToAction("Index", "Suppliers");

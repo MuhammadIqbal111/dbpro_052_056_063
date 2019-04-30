@@ -4,7 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="eaa4cd18303c4fae9c14fa545c509d70" Name="Diagram1">
+
+      <Diagram DiagramId="e12303055983406d86232eeb02fa0336" Name="Diagram1">
+
+
         <EntityTypeShape EntityType="DB22Model.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DB22Model.AdminOrder" Width="1.5" PointX="10" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="DB22Model.AdminOrderDetail" Width="1.5" PointX="12.25" PointY="7.625" IsExpanded="true" />
