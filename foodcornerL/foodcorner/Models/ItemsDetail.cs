@@ -26,10 +26,9 @@ namespace foodcorner.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ItemsDetail()
         {
-            this.PassOrders = new HashSet<PassOrder>();
             this.PlaceOrders = new HashSet<PlaceOrder>();
         }
-
+    
         public int ItemId { get; set; }
         public int CategoryId { get; set; }
         public string Name { get; set; }
@@ -48,5 +47,6 @@ namespace foodcorner.Models
             var ide = db.ItemsDetails.Where(p => (p.CategoryId == spec));
             return ide;
         }
+
     }
 }

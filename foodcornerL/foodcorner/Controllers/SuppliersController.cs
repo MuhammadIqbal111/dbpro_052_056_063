@@ -13,7 +13,7 @@ namespace foodcorner.Controllers
     public class SuppliersController : Controller
     {
         private DB22Entities3 db = new DB22Entities3();
-
+        
         // GET: Suppliers
         public ActionResult Index()
         {
@@ -42,19 +42,33 @@ namespace foodcorner.Controllers
             }
             return View(cat);
         }
-        public ActionResult ViewItems(int? id)
+        public ActionResult ViewItems(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            
 
             SupplierCategory cat = db.SupplierCategories.Find(id);
             if (cat == null)
             {
                 return HttpNotFound();
             }
+            AdminOrder a = new AdminOrder
+            {
+                OrderId = id
+            };
+            db.SaveChanges();
+            ViewBag.Message = a;
             return View(cat);
+        }
+        public ActionResult Buy(int id, int idd , int price)
+        {
+
+            AdminOrderDetail p = new AdminOrderDetail();
+            p.OrderId = idd;
+            p.SuppItemId = id;
+            p.Payment = price;
+            db.SaveChanges();
+            ViewBag.msg = "You bought this item :D";
+            return RedirectToAction("ViewItems", "Suppliers");
         }
         // GET: Suppliers/Details/5
         public ActionResult Details(int? id)

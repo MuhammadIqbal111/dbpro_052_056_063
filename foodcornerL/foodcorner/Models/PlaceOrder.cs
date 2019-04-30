@@ -19,6 +19,7 @@ namespace foodcorner.Models
         public int quantity { get; set; }
         public Nullable<int> Bill { get; set; }
         public string Feedback { get; set; }
+        public int PlaceId { get; set; }
     
         public virtual ItemsDetail ItemsDetail { get; set; }
         public virtual OrderDetail OrderDetail { get; set; }

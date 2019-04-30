@@ -24,6 +24,7 @@
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="SuppItemId" ColumnName="SuppItemId" />
           <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="DId" ColumnName="DId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -147,7 +148,6 @@
         <MappingFragment StoreEntitySet="PassOrder">
           <ScalarProperty Name="ChefId" ColumnName="ChefId" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
           <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -160,6 +160,7 @@
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="Bill" ColumnName="Bill" />
           <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+          <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

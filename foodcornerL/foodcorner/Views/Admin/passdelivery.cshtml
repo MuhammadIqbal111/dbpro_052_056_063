@@ -1,0 +1,33 @@
+﻿@model IEnumerable<foodcorner.Models.DeliveryTeam>
+
+@{
+    ViewBag.Title = "passdelivery";
+}
+
+<h2>passdelivery</h2>
+
+@{ var data = ViewBag.Message; }
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+
+                @Html.ActionLink("Assign", "AssignOrderDeli", new { id = item.DelivererId, idd = @data.OrderId });
+            </td>
+        </tr>
+    }
+
+</table>

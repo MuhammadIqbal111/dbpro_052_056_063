@@ -37,7 +37,7 @@ namespace foodcorner.Models
         public virtual ICollection<AssignOrder> AssignOrders { get; set; }
         public IEnumerable<AssignOrder> doctorsspec(int spec)
         {
-            var ide = db.AssignOrders.Where(p => (p.DelivererId== spec));
+            var ide = db.AssignOrders.Where(p => (p.DelivererId == spec));
             return ide;
         }
     }

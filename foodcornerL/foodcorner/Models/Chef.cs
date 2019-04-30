@@ -26,12 +26,12 @@ namespace foodcorner.Models
         {
             this.PassOrders = new HashSet<PassOrder>();
         }
-
+    
         public int ChefId { get; set; }
         public string Id { get; set; }
         public string Name { get; set; }
         public string State { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PassOrder> PassOrders { get; set; }
         public IEnumerable<PassOrder> doctorsspec(int spec)

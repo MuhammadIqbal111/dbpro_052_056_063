@@ -26,7 +26,7 @@ namespace foodcorner.Models
         {
             this.AdminOrderDetails = new HashSet<AdminOrderDetail>();
         }
-
+    
         public int ItemId { get; set; }
         public int CatId { get; set; }
         public string Name { get; set; }

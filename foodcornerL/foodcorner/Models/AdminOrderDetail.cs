@@ -17,6 +17,7 @@ namespace foodcorner.Models
         public int OrderId { get; set; }
         public int SuppItemId { get; set; }
         public int Payment { get; set; }
+        public int DId { get; set; }
     
         public virtual AdminOrder AdminOrder { get; set; }
         public virtual SupplierItem SupplierItem { get; set; }

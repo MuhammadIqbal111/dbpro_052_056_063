@@ -16,11 +16,9 @@ namespace foodcorner.Models
     {
         public int ChefId { get; set; }
         public int OrderId { get; set; }
-        public int ItemId { get; set; }
         public string Status { get; set; }
     
         public virtual Chef Chef { get; set; }
-        public virtual ItemsDetail ItemsDetail { get; set; }
         public virtual OrderDetail OrderDetail { get; set; }
     }
 }

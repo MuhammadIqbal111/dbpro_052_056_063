@@ -22,7 +22,7 @@
                 <img src="~/Content/imageslr/form-v6.jpg" alt="form">
             </div>
             <form class="form-detail" action="#" method="post">
-                <h2>Register Form</h2>
+                <h2>Welcome Admin</h2>
 
                 
                 <div class="form-row">
@@ -41,7 +41,7 @@
                 </div>
                 <br />
                 <div class="form-row">
-                    <li>@Html.ActionLink("View Suppliers", "ViewSuppliers", "Admin")</li>
+                    <li>@Html.ActionLink("View Supplier's Menu", "ViewSuppliers", "Admin")</li>
 
                 </div>
                 <br />
@@ -51,64 +51,18 @@
                 </div>
                 <br />
                 <div class="form-row">
-                    <li>@Html.ActionLink("View DeliveryTeam", "ViewDeliveryTeam", "Admin")</li>
-
-                </div>
-                <h3 style="color:darkblue;"><u>Generate Reports</u></h3>
+                <li>@Html.ActionLink("View DeliveryTeam", "ViewDeliveryTeam", "Admin")</li>
+                 </div>
                 <br />
                 <div class="form-row">
-                    <li>@Html.ActionLink("Admin Buy Products", "AdminBuyProduct", "Admin")</li>
-                </div>
-                <br />
-                <div class="form-row">
-                    <li>@Html.ActionLink("Delivered Orders", "DeliveredOrders", "Admin")</li>
+                    <li>@Html.ActionLink("Generate Reports", "Reports", "Admin")</li>
 
                 </div>
-                <br />
-                <div class="form-row">
-                    <li>@Html.ActionLink("List Of Admin Food Items", "ListOfAdminFoodItems", "Admin")</li>
-
-                </div>
-                <br />
-                <div class="form-row">
-                    <li>@Html.ActionLink("List Of Chefs", "ListOfChefs", "Admin")</li>
-
-                </div>
-                <br />
-                <div class="form-row">
-                    <li>@Html.ActionLink("List Of Orders", "ListOfOrders", "Admin")</li>
-
-                </div>
-                <br />
-                <div class="form-row">
-                    <li>@Html.ActionLink("Most Demanding Food Item", "MostDemandingFoodItem", "Admin")</li>
-
-                </div>
-                <div class="form-row">
-                    <li>@Html.ActionLink("Not Done Orders", "NotDoneOrders", "Admin")</li>
-
-                </div>
-                <div class="form-row">
-                    <li>@Html.ActionLink("Customers With Maximum Orders", "CustomersWithMaximumOrders", "Admin")</li>
-
-                </div>
-
-                <div class="form-row">
-                    <li>@Html.ActionLink("Orders In A Day", "OrdersInADay", "Admin")</li>
-
-                </div>
-                <div class="form-row">
-                    <li>@Html.ActionLink("List Of Suppliers", "ListOfSuppliers", "Admin")</li>
-
-                </div>
-                <div class="form-row">
-                    <li>@Html.ActionLink("Undelivered Orders", "UndeliveredOrders", "Admin")</li>
-
-                </div>
+                    <br />
 
 
 
-            </form>
+</form>
         </div>
     </div>
 </body>

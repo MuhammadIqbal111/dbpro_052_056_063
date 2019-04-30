@@ -14,8 +14,15 @@ namespace foodcorner.Models
     
     public partial class AdminOrder
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AdminOrder()
+        {
+            this.AdminOrderDetails = new HashSet<AdminOrderDetail>();
+        }
+    
         public int OrderId { get; set; }
     
-        public virtual AdminOrderDetail AdminOrderDetail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AdminOrderDetail> AdminOrderDetails { get; set; }
     }
 }
