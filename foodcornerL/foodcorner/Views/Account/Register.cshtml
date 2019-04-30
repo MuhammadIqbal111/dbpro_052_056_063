@@ -14,58 +14,84 @@
     <link rel="stylesheet" type="text/css" href="~/Content/csslr/nunito-font.css">
     <!-- Main Style Css -->
     <link rel="stylesheet" href="~/Content/csslr/style.css" />
+    <link rel="stylesheet" href="~/login/css/style.css">
+    <link rel="stylesheet" href="~/login/css/colors/blue.css">
 </head>
-<body class="form-v6">
+
+<body class="form-v6"style="padding-top:50px">
+   
     <div class="page-content">
+
         <div class="form-v6-content">
+
             <div class="form-left">
                 <img src="~/Content/imageslr/form-v6.jpg" alt="form">
             </div>
-            <form class="form-detail" action="#" method="post">
-                <h2>Register Form</h2>
+
+            <form>
+                <div>
+                    <h2 style="color:black;padding-left:20px;padding-top:40px;text-align:center">Registration Form</h2>
+                </div>
+
+                <div class="account-type">
+                    <div style="color:black;padding-left:10px;padding-top:20px">
+                        <input type="radio" name="account_type_radio" id="Customer-radio" value="Customer" class="account-type-radio" checked />
+                        <label for="Customer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i>Foody</label>
+                    </div>
+
+                    <div style="color:black;padding-left:5px;padding-top:20px">
+                        <input type="radio" name="account_type_radio" id="Chef-radio" value="Chef" class="account-type-radio" checked />
+                        <label for="Chef-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Chef</label>
+                    </div>
+
+                    <div style="color:black;padding-left:5px;padding-top:20px">
+                        <input type="radio" name="account_type_radio" id="Deliverer-radio" value="Deliverer" class="account-type-radio" checked />
+                        <label for="Deliverer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i>Deliverer</label>
+                    </div>
+                </div>
                 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary("", new { @class = "text-danger" })
-                <div class="form-row">
-                    @Html.TextBoxFor(model => model.roles, new { @class = "form-control", @placeholder = "Enter Role: Customer,Supplier, chef, delivery" })
 
-                </div>
-                <br/>
-                    <div class="form-row">
+                    <div class="form-row" style="color:black;padding-left:20px">
                         @Html.TextBoxFor(model => model.FName, new { @class = "form-control", @placeholder = "First Name" })
 
                     </div>
-                    <br />
-                    <div class="form-row">
+
+                    <div class="form-row" style="color:black;padding-left:20px">
                         @Html.TextBoxFor(model => model.LName, new { @class = "form-control", @placeholder = "Last Name" })
 
                     </div>
                     <br />
-                    <div class="form-row">
+                    <div class="form-row" style="color:black;padding-left:20px">
                         @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email" })
 
                     </div>
-                    <br />
-                    <div class="form-row">
+                    <div class="form-row" style="color:black;padding-left:20px">
                         @Html.TextBoxFor(model => model.Number, new { @class = "form-control", @placeholder = "Phone Number" })
 
                     </div>
-                    <br />
-                   
-                    <div class="form-row">
+
+                    <div class="form-row" style="color:black;padding-left:40px">
                         @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password" })
 
                     </div>
-                    <br />
-                    <div class="form-row">
+                    <div class="form-row" style="color:black;padding-left:40px">
                         @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
 
                     </div>
 
-                    <div class="form-row-last">
+                    <div class="form-detail" action="#" method="post" style="padding-left:40px">
                         <input type="submit" name="register" class="register" value="Register">
                     </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+
+
+
                 }
             </form>
         </div>
@@ -77,3 +103,17 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script src="~/login/js/jquery-3.3.1.min.js"></script>
+<script src="~/login/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="~/login/js/mmenu.min.js"></script>
+<script src="~/login/js/tippy.all.min.js"></script>
+<script src="~/login/js/simplebar.min.js"></script>
+<script src="~/login/js/bootstrap-slider.min.js"></script>
+<script src="~/login/js/bootstrap-select.min.js"></script>
+<script src="~/login/js/snackbar.js"></script>
+<script src="~/login/js/clipboard.min.js"></script>
+<script src="~/login/js/counterup.min.js"></script>
+<script src="~/login/js/magnific-popup.min.js"></script>
+<script src="~/login/js/slick.min.js"></script>
+<script src="~/login/js/custom.js"></script>

@@ -40,15 +40,15 @@
             </td>
 
             <td style="font-family:Arial;font-size:24px;padding-right:10px">
-                @Html.ActionLink("Edit", "Edit22", new { id = item.PlaceId }, null) |
+                @Html.ActionLink("Edit", "Edit222", new { id = item.PlaceId }, null) |
 
-                @Html.ActionLink("Delete", "Delete22", new { id = item.PlaceId })
+                @Html.ActionLink("Delete", "Delete222", new { id = item.PlaceId })
             </td>
         </tr>
     }
 
 </table>
 <h3 style="font-family:Arial;font-size:24px;padding-right:150px;color:dodgerblue;text-align:center;padding-top:20px"> Total Bill: @Model.Sum(i => i.Bill)</h3>
-<h4 style="font-family:Arial;font-size:24px;padding-right:50px;padding-bottom:100px; text-align:center;">@Html.ActionLink("Proceed to checkout", "Checkout" ) </h4>
+<h4 style="font-family:Arial;font-size:24px;padding-right:50px;padding-bottom:100px; text-align:center;">@Html.ActionLink("Proceed to checkout", "AdminCheckout" ) </h4>
 <h1 style="font-family:Arial;font-size:24px;padding-right:50px;padding-bottom:100px"> </h1>
 
