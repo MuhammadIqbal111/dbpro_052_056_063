@@ -15,7 +15,7 @@ namespace foodcorner.Controllers
     public class AdminController : Controller
     {
         private DB22Entities3 db = new DB22Entities3();
-
+        int orderid;
         public ActionResult Index()
         {
             
@@ -208,9 +208,74 @@ namespace foodcorner.Controllers
             return RedirectToAction("ViewItems", new { id = cati});
         }
         // items
-        public ActionResult AdminBuyProduct()
+        // orderdetail table created
+       
+        public ActionResult PlaceOrder(int id)
         {
-            return View();
+            AdminOrder od = new AdminOrder();
+            db.AdminOrders.Add(od);
+            db.SaveChanges();
+            TempData["id"] = orderid;
+            return View(db.SupplierCategories.ToList());
+
+        }
+
+        public ActionResult ViewSupplierItems(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            SupplierCategory cat = db.SupplierCategories.Find(id);
+            if (cat == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cat);
+        }
+
+        public ActionResult Addcart(int? id)
+        {
+            SupplierItem cat = db.SupplierItems.Find(id);
+            AdminOrderDetail po = new AdminOrderDetail();
+            po.OrderId = Convert.ToInt32(TempData["id"]);
+            po.SuppItemId = cat.ItemId;
+            po.Payment = cat.Price;
+            db.AdminOrderDetails.Add(po);
+            db.SaveChanges();
+            return RedirectToAction("ViewSupplierItem", new { id = cat.CatId });
+
+        }
+
+        public ActionResult ViewAdminCart()
+        {
+            orderid = Convert.ToInt32(TempData["id"]);
+            TempData["tot"] = orderid;
+
+            List<AdminOrderDetail> list = new List<AdminOrderDetail>();
+            var books = db.AdminOrderDetails;
+            foreach (AdminOrderDetail b in books)
+            {
+                if (b.OrderId == orderid)
+                {
+                    list.Add(b);
+                }
+            }
+            return View(list);
+
+        }
+
+        public ActionResult AdminCheckout()
+        {
+            int ff;
+            ff = Convert.ToInt32(TempData["tot"]);
+            AdminOrder pss = db.AdminOrders.Find(ff);
+            if (pss == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pss);
         }
         public ActionResult DeliveredOrders()
         {
@@ -334,5 +399,33 @@ namespace foodcorner.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
+        public ActionResult Delete222(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AdminOrderDetail adminOrderDetail = db.AdminOrderDetails.Find(id);
+            if (adminOrderDetail == null)
+            {
+                return HttpNotFound();
+            }
+            return View(adminOrderDetail);
+        }
+
+        // POST: AdminOrderDetails/Delete/5
+        [HttpPost, ActionName("Delete222")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed222(int id)
+        {
+            AdminOrderDetail adminOrderDetail = db.AdminOrderDetails.Find(id);
+            db.AdminOrderDetails.Remove(adminOrderDetail);
+            TempData["id"] = adminOrderDetail.OrderId;
+            db.SaveChanges();
+            return RedirectToAction("ViewAdminCart");
+        }
+
     }
 }

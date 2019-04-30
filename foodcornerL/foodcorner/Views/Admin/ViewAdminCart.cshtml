@@ -1,0 +1,49 @@
+﻿@model IEnumerable<foodcorner.Models.AdminOrderDetail>
+
+@{
+    ViewBag.Title = "ViewAdminCart";
+}
+
+<h1 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:40px; margin-bottom:50px;padding-top:100px; text-align:center;color:cornflowerblue"><b>CART </b></h1>
+
+
+
+
+<table class="table">
+    <tr>
+        <th style="font-family:Arial;font-size:24px; padding-left:40px">
+            @Html.DisplayNameFor(model => model.Payment)
+        </th>
+
+        <th style="font-family:Arial;font-size:24px; padding-left:40px">
+            @Html.DisplayNameFor(model => model.SupplierItem.Name)
+        </th>
+
+        <th style="font-family:Arial;font-size:24px;padding-right:10px">MANAGE</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="font-family:Arial;font-size:24px; padding-left:40px">
+                @Html.DisplayFor(modelItem => item.Payment)
+            </td>
+
+            <td style="font-family:Arial;font-size:24px; padding-left:40px">
+                @Html.DisplayFor(modelItem => item.SupplierItem.Name)
+            </td>
+            <td style="font-family:Arial;font-size:24px;padding-right:10px">
+                
+
+                @Html.ActionLink("Delete", "Delete22", new { id = item.DId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<h3 style="font-family:Arial;font-size:24px;padding-right:150px;color:dodgerblue;text-align:center;padding-top:20px"> Total Bill: @Model.Sum(i => i.Payment)</h3>
+<h4 style="font-family:Arial;font-size:24px;padding-right:50px;padding-bottom:100px; text-align:center;">@Html.ActionLink("Proceed to checkout", "Checkout") </h4>
+<h1 style="font-family:Arial;font-size:24px;padding-right:50px;padding-bottom:100px"> </h1>
+

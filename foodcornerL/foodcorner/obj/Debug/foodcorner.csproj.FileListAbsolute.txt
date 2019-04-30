@@ -1197,3 +1197,4 @@ F:\project\dbpro_052_056_063\foodcornerL\foodcorner\obj\Debug\foodcorner.csproj.
 F:\project\dbpro_052_056_063\foodcornerL\foodcorner\obj\Debug\foodcorner.csproj.CopyComplete
 F:\project\dbpro_052_056_063\foodcornerL\foodcorner\obj\Debug\foodcorner.dll
 F:\project\dbpro_052_056_063\foodcornerL\foodcorner\obj\Debug\foodcorner.pdb
+F:\project\dbpro_052_056_063\foodcornerL\foodcorner\obj\Debug\foodcorner.csprojAssemblyReference.cache
