@@ -1,0 +1,49 @@
+﻿@model IEnumerable<foodcorner.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "ViewOrder";
+}
+
+
+<h1 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:40px; margin-bottom:50px;padding-top:100px; text-align:center;color:cornflowerblue"><b>View Orders</b></h1>
+
+<table class="table">
+    <tr>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            @Html.DisplayNameFor(model => model.RequiredDate)
+        </th>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            VIEW DETAILS
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.DisplayFor(modelItem => item.RequiredDate)
+            </td>
+
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.ActionLink("Details", "GetDetails", new { id = item.OrderId })
+
+            </td>
+        </tr>
+    }
+
+</table>

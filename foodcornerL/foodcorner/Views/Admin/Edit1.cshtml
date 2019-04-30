@@ -5,12 +5,13 @@
 }
 
 <h2>Edit1</h2>
+<h2 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:0px; margin-bottom:50px;padding-top:100px; text-align:center;color:cornflowerblue"> EDIT</h2>
 
 @using (Html.BeginForm("Edit1", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal" style="padding-top:34px;padding-left:50px">
+    <div class="form-horizontal" style="padding-top:10px;padding-left:50px">
         <h4>ItemsDetail</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })

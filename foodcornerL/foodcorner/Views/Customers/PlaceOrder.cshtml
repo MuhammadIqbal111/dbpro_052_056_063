@@ -4,27 +4,27 @@
     ViewBag.Title = "PlaceOrder";
 }
 
-<h2>VIEW MENU</h2>
+<h2 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:0px; margin-bottom:50px;padding-top:100px; text-align:center;color:cornflowerblue"> MENU</h2>
 
-<h1 style="margin-top:50px;font-family:Arial;font-size:35px; margin-bottom:50px;padding-top:45px; text-align:center;color:cornflowerblue"><b>CATEGORIES</b></h1>
+<p style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:40px; margin-bottom:50px;padding-top:-5px; text-align:center;color:cornflowerblue"><b>CATEGORIES</b></p>
 
 <table class="table table-bordered table-condensed">
     <tr>
 
-        <td style="font-family:Arial;font-size:24px">Category Name</td>
-        <td style="font-family:Arial;font-size:24px">Items</td>
+        <td style="font-family:Arial;font-size:24px;padding-left:150px">Category Name</td>
+        <td style="font-family:Arial;font-size:24px;padding-right:80px">Items</td>
     </tr>
 
 
     @foreach (var item in Model)
     {
         <tr>
-            <td style="font-family:Arial;font-size:20px">
+            <td style="font-family:Arial;font-size:24px;padding-left:150px">
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
-            <td>
+            <td style="font-family:Arial;font-size:24px;padding-right:80px">
 
-                @Html.ActionLink("View Items", "ViewItems", new { id = item.CategoryId }) |
+                @Html.ActionLink("View Items", "ViewItems", new { id = item.CategoryId })
 
 
             </td>
@@ -32,5 +32,8 @@
     }
 
 </table>
+
+<h2 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:0px; margin-bottom:50px;padding-top:50px; text-align:center;color:cornflowerblue">        </h2>
+
 
 

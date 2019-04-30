@@ -11,16 +11,9 @@ namespace foodcorner.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;
-    using System.Linq;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web;
-
+    
     public partial class Chef
     {
-        public DB22Entities3 db = new DB22Entities3();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Chef()
         {
@@ -34,10 +27,5 @@ namespace foodcorner.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PassOrder> PassOrders { get; set; }
-        public IEnumerable<PassOrder> doctorsspec(int spec)
-        {
-            var ide = db.PassOrders.Where(p => (p.ChefId == spec));
-            return ide;
-        }
     }
 }

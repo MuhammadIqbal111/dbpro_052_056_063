@@ -18,6 +18,7 @@ namespace foodcorner.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web;
 
+
     public partial class SupplierItem
     {
         public DB22Entities3 db = new DB22Entities3();
@@ -37,6 +38,7 @@ namespace foodcorner.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdminOrderDetail> AdminOrderDetails { get; set; }
         public virtual SupplierCategory SupplierCategory { get; set; }
+
         public IEnumerable<SupplierItem> doctorsspec(int spec)
         {
             var ide = db.SupplierItems.Where(p => (p.CatId == spec));

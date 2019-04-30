@@ -1193,7 +1193,6 @@ F:\project\dbpro_052_056_063\foodcornerL\foodcorner\bin\Microsoft.AI.DependencyC
 F:\project\dbpro_052_056_063\foodcornerL\foodcorner\bin\Microsoft.AI.WindowsServer.xml
 F:\project\dbpro_052_056_063\foodcornerL\foodcorner\bin\Microsoft.AI.Web.xml
 F:\project\dbpro_052_056_063\foodcornerL\foodcorner\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-F:\project\dbpro_052_056_063\foodcornerL\foodcorner\obj\Debug\foodcorner.csprojAssemblyReference.cache
 F:\project\dbpro_052_056_063\foodcornerL\foodcorner\obj\Debug\foodcorner.csproj.CoreCompileInputs.cache
 F:\project\dbpro_052_056_063\foodcornerL\foodcorner\obj\Debug\foodcorner.csproj.CopyComplete
 F:\project\dbpro_052_056_063\foodcornerL\foodcorner\obj\Debug\foodcorner.dll

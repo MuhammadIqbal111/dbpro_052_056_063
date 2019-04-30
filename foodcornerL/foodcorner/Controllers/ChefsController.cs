@@ -63,17 +63,17 @@ namespace foodcorner.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            PassOrder cat = db.PassOrders.Find(id);
+            PlaceOrder cat = db.PlaceOrders.Find(id);
             if (cat == null)
             {
                 ViewBag.msg = "No Order is assigned to you";
                 //return HttpNotFound();
             }
-            List<PassOrder> list = new List<PassOrder>();
-            var books = db.PassOrders;
-            foreach (PassOrder b in books)
+            List<PlaceOrder> list = new List<PlaceOrder>();
+            var books = db.PlaceOrders;
+            foreach (PlaceOrder b in books)
             {
-                if (b.ChefId == id && b.Status == "Inprogress")
+                if (b.OrderId == id)
                 {
                     list.Add(b);
                 }
