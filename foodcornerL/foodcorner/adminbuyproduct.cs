@@ -16,14 +16,14 @@ namespace foodcorner {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class adminbuyproduct : ReportClass {
+    public class Adminbuyproduct : ReportClass {
         
-        public adminbuyproduct() {
+        public Adminbuyproduct() {
         }
         
         public override string ResourceName {
             get {
-                return "adminbuyproduct.rpt";
+                return "Adminbuyproduct.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace foodcorner {
         
         public override string FullResourceName {
             get {
-                return "foodcorner.adminbuyproduct.rpt";
+                return "foodcorner.Adminbuyproduct.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace foodcorner {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace foodcorner {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,33 +82,17 @@ namespace foodcorner {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[6];
+                return this.ReportDefinition.Sections[4];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class Cachedadminbuyproduct : Component, ICachedReport {
+    public class CachedAdminbuyproduct : Component, ICachedReport {
         
-        public Cachedadminbuyproduct() {
+        public CachedAdminbuyproduct() {
         }
         
         [Browsable(false)]
@@ -145,7 +129,7 @@ namespace foodcorner {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            adminbuyproduct rpt = new adminbuyproduct();
+            Adminbuyproduct rpt = new Adminbuyproduct();
             rpt.Site = this.Site;
             return rpt;
         }

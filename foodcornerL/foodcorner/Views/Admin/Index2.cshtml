@@ -1,0 +1,35 @@
+﻿@model IEnumerable<foodcorner.Models.DeliveryTeam>
+
+@{
+    ViewBag.Title = "Index2";
+}
+
+
+<h1 style="margin-top:50px;font-family:Arial;font-size:35px; margin-bottom:50px;padding-top:45px; text-align:center;color:cornflowerblue"><b></b></h1>
+<br />
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th style="font-family:Arial;font-size:24px"> MANAGE </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+
+                @Html.ActionLink("Assign", "AssignDeli", new { id = item.DelivererId })
+            </td>
+        </tr>
+    }
+
+</table>

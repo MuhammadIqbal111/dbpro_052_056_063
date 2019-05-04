@@ -1,0 +1,54 @@
+﻿@model IEnumerable<foodcorner.Models.PlaceOrder>
+
+@{
+    ViewBag.Title = "ViewCart";
+}
+
+<h1 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:40px; margin-bottom:50px;padding-top:100px; text-align:center;color:cornflowerblue"><b>CART </b></h1>
+
+
+
+<table class="table">
+    <tr>
+        <th style="font-family:Arial;font-size:24px; padding-left:40px">
+            @Html.DisplayNameFor(model => model.ItemsDetail.Name)
+        </th>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+
+        <th style="font-family:Arial;font-size:24px; padding-right:20px">
+            
+            @Html.DisplayNameFor(model => model.Bill)
+        </th>
+
+        <th style="font-family:Arial;font-size:24px;padding-right:10px">MANAGE</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="font-family:Arial;font-size:24px; padding-left:40px">
+                @Html.DisplayFor(modelItem => item.ItemsDetail.Name )
+            </td>
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.DisplayFor(modelItem => item.Bill)
+            </td>
+
+            <td style="font-family:Arial;font-size:24px;padding-right:10px">
+                @Html.ActionLink("Edit", "Edit222", new { id = item.PlaceId }, null) |
+
+                @Html.ActionLink("Delete", "Delete222", new { id = item.PlaceId })
+            </td>
+        </tr>
+    }
+
+</table>
+<h3 style="font-family:Arial;font-size:24px;padding-right:150px;color:dodgerblue;text-align:center;padding-top:20px"> Total Bill: @Model.Sum(i => i.Bill)</h3>
+<h4 style="font-family:Arial;font-size:24px;padding-right:50px;padding-bottom:100px; text-align:center;">@Html.ActionLink("Proceed to checkout", "Checkout" ) </h4>
+<h1 style="font-family:Arial;font-size:24px;padding-right:50px;padding-bottom:100px"> </h1>
+

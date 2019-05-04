@@ -29,7 +29,7 @@ namespace foodcorner.Controllers
         public ActionResult AdminBuyProduct()
         {
             ReportDocument Report = new ReportDocument();
-            Report.Load(Server.MapPath("~/adminbuyproduct.rpt"));
+            Report.Load(Server.MapPath("~/Adminbuyproduct.rpt"));
             Report.SetDatabaseLogon("USER1\\SQLEXPRESS", "DB22");
 
             Stream s = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
@@ -85,7 +85,7 @@ namespace foodcorner.Controllers
         public ActionResult NotDoneOrders()
         {
             ReportDocument Report = new ReportDocument();
-            Report.Load(Server.MapPath("~/NotDoneOrders.rpt"));
+            Report.Load(Server.MapPath("~/Notdoneorder.rpt"));
             Report.SetDatabaseLogon("USER1\\SQLEXPRESS", "DB22");
 
             Stream s = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);

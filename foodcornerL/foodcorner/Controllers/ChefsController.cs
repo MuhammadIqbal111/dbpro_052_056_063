@@ -13,40 +13,13 @@ namespace foodcorner.Controllers
     public class ChefsController : Controller
     {
         private DB22Entities3 db = new DB22Entities3();
+        int f;
 
         // GET: Chefs
         public ActionResult Index()
         {
             return View(db.Chefs.ToList());
         }
-        public ActionResult Index1(int? id)
-        {
-            
-            return View(db.Chefs.ToList());
-        }
-        public ActionResult Assign(int id, int idd)
-        {
-            
-            PassOrder p = new PassOrder();
-            p.ChefId = id;
-            p.OrderId = idd;
-            p.Status = "Busy";
-            db.SaveChanges();
-            ViewBag.msg = "This order is assigned to this chef!";
-            return RedirectToAction("ViewOrders", "Admin");
-        }
-        public ActionResult AssignOrderDeli(int id, int idd)
-        {
-
-            AssignOrder p = new AssignOrder();
-            p.DelivererId = id;
-            p.OrderId = idd;
-            p.Status = "Not Delivered";
-            db.SaveChanges();
-            ViewBag.msg = "This order is assigned to this Delivery Team!";
-            return RedirectToAction("ViewOrders", "Admin");
-        }
-
         public ActionResult Welcome(string id)
         {
 

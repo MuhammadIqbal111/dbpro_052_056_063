@@ -151,19 +151,16 @@ namespace foodcorner.Controllers
         {
             return View();
         }
-
-        
-
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, string account_type_radio)
         {
+            model.roles = account_type_radio;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName=model.FName, Email = model.Email,PhoneNumber=model.Number };
+                var user = new ApplicationUser { UserName = model.FName, Email = model.Email, PhoneNumber = model.Number };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -172,26 +169,26 @@ namespace foodcorner.Controllers
                     {
                         DB22Entities3 db1 = new DB22Entities3();
                         Customer cus = new Customer();
-                        
+
                         cus.Id = user.Id;
-                        cus.Name =model.FName;
+                        cus.Name = model.FName;
                         db1.Customers.Add(cus);
                         db1.SaveChanges();
                         await UserManager.AddToRoleAsync(user.Id, "Customer");
                         db1.SaveChanges();
                         return RedirectToAction("Welcome", "Customers", new { id = user.Id });
                     }
-                    else if(model.roles=="Chef")
+                    else if (model.roles == "Chef")
                     {
-                            DB22Entities3 db1 = new DB22Entities3();
-                            Chef che = new Chef();
-                            che.Id = user.Id;
-                            che.Name = model.FName;
-                            che.State ="Free";
-                            db1.Chefs.Add(che);
-                           db1.SaveChanges();
-                       
-                          await UserManager.AddToRoleAsync(user.Id, "Chef");
+                        DB22Entities3 db1 = new DB22Entities3();
+                        Chef che = new Chef();
+                        che.Id = user.Id;
+                        che.Name = model.FName;
+                        che.State = "Free";
+                        db1.Chefs.Add(che);
+                        db1.SaveChanges();
+
+                        await UserManager.AddToRoleAsync(user.Id, "Chef");
                         //db1.SaveChanges();
                         return RedirectToAction("Welcome", "Chefs", new { id = user.Id });
 
@@ -203,7 +200,7 @@ namespace foodcorner.Controllers
                         Supplier che = new Supplier();
                         che.Id = user.Id;
                         che.Name = model.FName;
-                        
+
                         db1.Suppliers.Add(che);
                         db1.SaveChanges();
                         await UserManager.AddToRoleAsync(user.Id, "Supplier");
@@ -213,13 +210,13 @@ namespace foodcorner.Controllers
 
                     }
 
-                    else if (model.roles == "Delivery")
+                    else if (model.roles == "Deliverer")
                     {
                         DB22Entities3 db1 = new DB22Entities3();
                         DeliveryTeam che = new DeliveryTeam();
                         che.Id = user.Id;
                         che.Name = model.FName;
-                        
+
                         db1.DeliveryTeams.Add(che);
                         db1.SaveChanges();
                         await UserManager.AddToRoleAsync(user.Id, "Delivery");
@@ -242,6 +239,7 @@ namespace foodcorner.Controllers
             return View(model);
         }
 
+        
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

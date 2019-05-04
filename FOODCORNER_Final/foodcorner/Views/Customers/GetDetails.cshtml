@@ -1,0 +1,59 @@
+﻿@model IEnumerable<foodcorner.Models.PlaceOrder>
+
+@{
+    ViewBag.Title = "GetDetails";
+}
+
+
+
+<h1 style="margin-top:50px;font-family:'Times New Roman', Times, serif;font-size:40px; margin-bottom:50px;padding-top:100px; text-align:center;color:cornflowerblue"><b>GIVE FEEDBACK</b></h1>
+
+<table class="table">
+    <tr>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            @Html.DisplayNameFor(model => model.Bill)
+        </th>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            @Html.DisplayNameFor(model => model.Feedback)
+        </th>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            @Html.DisplayNameFor(model => model.ItemsDetail.Name)
+        </th>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            @Html.DisplayNameFor(model => model.OrderDetail.State)
+        </th>
+        <th style="font-family:Arial;font-size:24px; padding-left:20px">
+            FEEDBACK
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.DisplayFor(modelItem => item.Bill)
+            </td>
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.DisplayFor(modelItem => item.Feedback)
+            </td>
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.DisplayFor(modelItem => item.ItemsDetail.Name)
+            </td>
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.DisplayFor(modelItem => item.OrderDetail.State)
+            </td>
+            <td style="font-family:Arial;font-size:24px; padding-left:20px">
+                @Html.ActionLink("Give Feedback", "Edit33", new { id = item.PlaceId }) |
+
+            </td>
+        </tr>
+    }
+
+</table>

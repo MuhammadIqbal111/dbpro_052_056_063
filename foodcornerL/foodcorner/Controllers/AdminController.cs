@@ -14,14 +14,21 @@ namespace foodcorner.Controllers
 {
     public class AdminController : Controller
     {
+        
         private DB22Entities3 db = new DB22Entities3();
         int orderid;
+        int f;
+        int g, d, t;
         public ActionResult Index()
         {
             
             return View(db.Categories.ToList());
             
             
+        }
+        public ActionResult ViewOrders()
+        {
+            return View(db.PlaceOrders.ToList());
         }
         public ActionResult Welcome()
         {
@@ -35,10 +42,10 @@ namespace foodcorner.Controllers
         {
             return View();
         }
-        
+
         public ActionResult AssignOrderr(int id)
         {
-            
+
             List<Chef> list = new List<Chef>();
             Chef c = new Chef();
             PassOrder cat = db.PassOrders.Find(id);
@@ -47,26 +54,74 @@ namespace foodcorner.Controllers
                 ViewBag.msg = "This order has been assigned";
                 return RedirectToAction("ViewOrders", "Admin");
             }
-            AdminOrder a = new AdminOrder
+            TempData["id"] = id;
+            return RedirectToAction("Index1", "Admin");
+        }
+       
+        public ActionResult Index1()
+        {
+           f = Convert.ToInt32(TempData["id"]);
+            TempData["id"] = f;
+            List<Chef> list = new List<Chef>();
+            var books = db.Chefs;
+            foreach (Chef b in books)
             {
-                OrderId = id
-            };
-            ViewBag.Message = a;
-            return RedirectToAction("Index1", "Chefs");
+                if (b.State == "Free")
+                {
+                    list.Add(b);
+                }
+            }
+            return View(list);
+        }
+        public ActionResult Assign(int id)
+        {
+            g = Convert.ToInt32(TempData["id"]);
+            PassOrder p = new PassOrder();
+            p.ChefId = id;
+            p.OrderId = g;
+            p.Status = "Inprogress";
+            db.PassOrders.Add(p);
+            db.SaveChanges();
+            return RedirectToAction("ViewOrders", "Admin");
         }
         public ActionResult PassOrderr(int id)
-        {
-            AdminOrder a = new AdminOrder
+        { 
+            List<DeliveryTeam> list = new List<DeliveryTeam>();
+            DeliveryTeam c = new DeliveryTeam();
+            AssignOrder cat = db.AssignOrders.Find(id);
+            if (cat != null)
             {
-                OrderId = id
-            };
-            ViewBag.Message = a;
-            return RedirectToAction("Index1", "Chefs");
+                ViewBag.msg = "This order has been assigned";
+                return RedirectToAction("ViewOrders", "Admin");
+            }
+            TempData["id"] = id;
+            return RedirectToAction("Index2", "Admin");
         }
-        public ActionResult ViewOrders()
+        public ActionResult Index2()
         {
-            return View(db.PlaceOrders.ToList());
+            d = Convert.ToInt32(TempData["id"]);
+            TempData["id"] = d;
+            List<DeliveryTeam> list = new List<DeliveryTeam>();
+            var teams = db.DeliveryTeams;
+            foreach (DeliveryTeam b in teams)
+            {
+                    list.Add(b);
+            }
+            return View(list);
         }
+        public ActionResult AssignDeli(int id)
+        {
+            t = Convert.ToInt32(TempData["id"]);
+            AssignOrder p = new AssignOrder();
+            p.DelivererId = id;
+            p.OrderId = t;
+            p.Status = "Not Delivered";
+            db.AssignOrders.Add(p);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewOrders", "Admin");
+        }
+        
        
         public ActionResult OrderDet(int? id)
         {
@@ -107,7 +162,7 @@ namespace foodcorner.Controllers
         {
             return RedirectToAction("Index", "Suppliers");
         }
-        public ActionResult ViewDelivery()
+        public ActionResult ViewDeliveryTeam()
         {
             return RedirectToAction("Index", "DeliveryTeams");
         }
